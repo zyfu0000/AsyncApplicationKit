@@ -7,5 +7,7 @@ target 'AsyncApplicationKit' do
     pod 'libextobjc'
     pod 'YYDispatchQueuePool'
     pod 'Aspects'
+    pod 'KVOController'
+    pod 'VIMediaCache'
 end
 

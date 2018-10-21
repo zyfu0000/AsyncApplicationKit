@@ -1,5 +1,6 @@
 PODS:
   - Aspects (1.4.1)
+  - KVOController (1.2.0)
   - libextobjc (0.4.1):
     - libextobjc/EXTADT (= 0.4.1)
     - libextobjc/EXTConcreteProtocol (= 0.4.1)
@@ -57,33 +58,40 @@ PODS:
     - PINRemoteImage/iOS (= 3.0.0-beta.13)
     - PINRemoteImage/PINCache
     - Texture/Core
+  - VIMediaCache (0.4)
   - YYDispatchQueuePool (1.0)
 
 DEPENDENCIES:
   - Aspects
+  - KVOController
   - libextobjc
   - Texture
+  - VIMediaCache
   - YYDispatchQueuePool
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Aspects
+    - KVOController
     - libextobjc
     - PINCache
     - PINOperation
     - PINRemoteImage
     - Texture
+    - VIMediaCache
     - YYDispatchQueuePool
 
 SPEC CHECKSUMS:
   Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
+  KVOController: d72ace34afea42468329623b3379ab3cd1d286b6
   libextobjc: a650fc1bf489a3d3a9bc2e621efa3e1006fc5471
   PINCache: d195fdba255283f7e9900a55e3cced377f431f9b
   PINOperation: a6219e6fc9db9c269eb7a7b871ac193bcf400aac
   PINRemoteImage: d6d51c5d2adda55f1ce30c96e850b6c4ebd2856a
   Texture: 9d7e38965cf22ccd7cd9c249dd78b3f14e70ab6c
+  VIMediaCache: aa650f82cb114c68a343beb4e67416cf5eb2f3a2
   YYDispatchQueuePool: 3dfb2274bcc74207688dde8ac6f7bdd46871dd7b
 
-PODFILE CHECKSUM: 14d9d7a95b5277808e0e89645bfceb282d77a9d1
+PODFILE CHECKSUM: 7607b9e94a4ba2de65b1551a3c99c947b760490c
 
 COCOAPODS: 1.5.3
