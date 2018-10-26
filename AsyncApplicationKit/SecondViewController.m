@@ -8,7 +8,6 @@
 
 #import "SecondViewController.h"
 #import "AAKDispatchQueue.h"
-#import <AsyncDisplayKit/AsyncDisplayKit.h>
 #import "SecondViewController.h"
 
 @implementation SecondViewController
@@ -17,25 +16,25 @@
 {
     [super viewDidLoad];
     
-    [AAKDispatchQueue async:^{
-        NSDictionary *placeholderAttrs = @{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-LightItalic" size:14.0f] , NSForegroundColorAttributeName: [UIColor greenColor] };
-        
-        ASButtonNode *button = [[ASButtonNode alloc] init];
-        [button setAttributedTitle:[[NSAttributedString alloc] initWithString:@"返回" attributes:placeholderAttrs] forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(action:) forControlEvents:ASControlNodeEventTouchUpInside];
-        [button setFrame:CGRectMake(20, 20, 100, 44)];
-        button.backgroundColor = [UIColor redColor];
-        button.titleNode.displaysAsynchronously = NO;
-        [self.node addSubnode:button];
-    }];
+//    [AAKDispatchQueue async:^{
+//        NSDictionary *placeholderAttrs = @{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-LightItalic" size:14.0f] , NSForegroundColorAttributeName: [UIColor greenColor] };
+//        
+//        ASButtonNode *button = [[ASButtonNode alloc] init];
+//        [button setAttributedTitle:[[NSAttributedString alloc] initWithString:@"返回" attributes:placeholderAttrs] forState:UIControlStateNormal];
+//        [button addTarget:self action:@selector(action:) forControlEvents:ASControlNodeEventTouchUpInside];
+//        [button setFrame:CGRectMake(20, 20, 100, 44)];
+//        button.backgroundColor = [UIColor redColor];
+//        button.titleNode.displaysAsynchronously = NO;
+//        [self.node addSubnode:button];
+//    }];
 }
 
-- (void)action:(id)sender
-{
-    [AAKDispatchQueue async:^{
-        SecondViewController *vc = [SecondViewController new];
-        [self.navigationController pushViewController:vc animated:YES];
-    }];
-}
+//- (void)action:(id)sender
+//{
+//    [AAKDispatchQueue async:^{
+//        SecondViewController *vc = [SecondViewController new];
+//        [self.navigationController pushViewController:vc animated:YES];
+//    }];
+//}
 
 @end

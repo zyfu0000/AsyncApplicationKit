@@ -7,13 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <AsyncDisplayKit/AsyncDisplayKit.h>
 #import "AAKNavigationController.h"
 
 @interface AAKViewController : NSObject
 
 @property (nonatomic, strong, readonly) UIViewController *viewController;
-@property (nonatomic, strong) ASDisplayNode *node;
 @property (nonatomic, weak) AAKNavigationController *navigationController;
 
 - (void)viewDidLoad;

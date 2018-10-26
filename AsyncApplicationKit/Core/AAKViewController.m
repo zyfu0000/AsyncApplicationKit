@@ -11,7 +11,6 @@
 
 @interface AAKViewController ()
 
-@property (nonatomic, strong) ASViewController *vc;
 
 @end
 
@@ -19,51 +18,51 @@
 
 - (UIViewController *)viewController
 {
-    return self.vc;
+    return [UIViewController new];
 }
 
 - (instancetype)init
 {
     self = [super init];
     
-    self.node = [ASDisplayNode new];
-    self.vc = [[ASViewController alloc] initWithNode:self.node];
-    
-    [self.vc
-     aspect_hookSelector:@selector(viewDidLoad)
-     withOptions:AspectPositionAfter
-     usingBlock:^(id<AspectInfo> aspectInfo) {
-         [self viewDidLoad];
-     }
-     error:nil];
-    [self.vc
-     aspect_hookSelector:@selector(viewWillAppear:)
-     withOptions:AspectPositionAfter
-     usingBlock:^(id<AspectInfo> aspectInfo, BOOL animated) {
-         [self viewWillAppear:animated];
-     }
-     error:nil];
-    [self.vc
-     aspect_hookSelector:@selector(viewDidAppear:)
-     withOptions:AspectPositionAfter
-     usingBlock:^(id<AspectInfo> aspectInfo, BOOL animated) {
-         [self viewDidAppear:animated];
-     }
-     error:nil];
-    [self.vc
-     aspect_hookSelector:@selector(viewWillDisappear:)
-     withOptions:AspectPositionAfter
-     usingBlock:^(id<AspectInfo> aspectInfo, BOOL animated) {
-         [self viewWillDisappear:animated];
-     }
-     error:nil];
-    [self.vc
-     aspect_hookSelector:@selector(viewDidDisappear:)
-     withOptions:AspectPositionAfter
-     usingBlock:^(id<AspectInfo> aspectInfo, BOOL animated) {
-         [self viewDidDisappear:animated];
-     }
-     error:nil];
+//    self.node = [ASDisplayNode new];
+//    self.vc = [[ASViewController alloc] initWithNode:self.node];
+//
+//    [self.vc
+//     aspect_hookSelector:@selector(viewDidLoad)
+//     withOptions:AspectPositionAfter
+//     usingBlock:^(id<AspectInfo> aspectInfo) {
+//         [self viewDidLoad];
+//     }
+//     error:nil];
+//    [self.vc
+//     aspect_hookSelector:@selector(viewWillAppear:)
+//     withOptions:AspectPositionAfter
+//     usingBlock:^(id<AspectInfo> aspectInfo, BOOL animated) {
+//         [self viewWillAppear:animated];
+//     }
+//     error:nil];
+//    [self.vc
+//     aspect_hookSelector:@selector(viewDidAppear:)
+//     withOptions:AspectPositionAfter
+//     usingBlock:^(id<AspectInfo> aspectInfo, BOOL animated) {
+//         [self viewDidAppear:animated];
+//     }
+//     error:nil];
+//    [self.vc
+//     aspect_hookSelector:@selector(viewWillDisappear:)
+//     withOptions:AspectPositionAfter
+//     usingBlock:^(id<AspectInfo> aspectInfo, BOOL animated) {
+//         [self viewWillDisappear:animated];
+//     }
+//     error:nil];
+//    [self.vc
+//     aspect_hookSelector:@selector(viewDidDisappear:)
+//     withOptions:AspectPositionAfter
+//     usingBlock:^(id<AspectInfo> aspectInfo, BOOL animated) {
+//         [self viewDidDisappear:animated];
+//     }
+//     error:nil];
     
     return self;
 }

@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "AAKNavigationController.h"
 #import "FirstViewController.h"
+#import "CocoVC.h"
 
 @interface AppDelegate ()
 
@@ -18,11 +19,25 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.backgroundColor = [UIColor whiteColor];
-    AAKNavigationController *vc = [[AAKNavigationController alloc] initWithRootViewController:[FirstViewController new]];
-    self.window.rootViewController = vc.navigationController;
-    [self.window makeKeyAndVisible];
+//    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//    self.window.backgroundColor = [UIColor whiteColor];
+//    AAKNavigationController *vc = [[AAKNavigationController alloc] initWithRootViewController:[FirstViewController new]];
+//    self.window.rootViewController = vc.navigationController;
+//    [self.window makeKeyAndVisible];
+    
+    
+    _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    _window.backgroundColor = [UIColor redColor];
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
+    [flowLayout setMinimumInteritemSpacing:10];
+    [flowLayout setMinimumLineSpacing:10];
+    CocoVC *viewController = [[CocoVC alloc] initWithCollectionViewLayout:flowLayout];
+    
+    [_window setRootViewController:viewController];//[[UINavigationController alloc] initWithRootViewController:viewController]];
+    [_window makeKeyAndVisible];
+    
+    
     return YES;
 }
 

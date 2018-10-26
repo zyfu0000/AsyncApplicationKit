@@ -7,13 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		720784A0217B048900B6EFA7 /* MCAVPlayerItemRemoteCacheTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 72078494217B048900B6EFA7 /* MCAVPlayerItemRemoteCacheTask.m */; };
-		720784A1217B048900B6EFA7 /* MCCacheSupportUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 72078495217B048900B6EFA7 /* MCCacheSupportUtils.m */; };
-		720784A2217B048900B6EFA7 /* MCAVPlayerItemCacheTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 72078498217B048900B6EFA7 /* MCAVPlayerItemCacheTask.m */; };
-		720784A3217B048900B6EFA7 /* MCAVPlayerItemCacheLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 72078499217B048900B6EFA7 /* MCAVPlayerItemCacheLoader.m */; };
-		720784A4217B048900B6EFA7 /* MCAVPlayerItemCacheFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7207849A217B048900B6EFA7 /* MCAVPlayerItemCacheFile.m */; };
-		720784A5217B048900B6EFA7 /* MCAVPlayerItemLocalCacheTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 7207849B217B048900B6EFA7 /* MCAVPlayerItemLocalCacheTask.m */; };
-		720784A6217B048900B6EFA7 /* AVPlayerItem+MCCacheSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 7207849E217B048900B6EFA7 /* AVPlayerItem+MCCacheSupport.m */; };
 		72917B4E216A5F4B002AD5A7 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72917B4D216A5F4B002AD5A7 /* SecondViewController.m */; };
 		72E7253A215787A600DDEECF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 72E72539215787A600DDEECF /* AppDelegate.m */; };
 		72E72542215787A800DDEECF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72E72541215787A800DDEECF /* Assets.xcassets */; };
@@ -23,26 +16,19 @@
 		72E725612165C14400DDEECF /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72E725602165C14400DDEECF /* FirstViewController.m */; };
 		72E725652167A47B00DDEECF /* AAKDispatchQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 72E725642167A47B00DDEECF /* AAKDispatchQueue.m */; };
 		72E725682167A50F00DDEECF /* AAKNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72E725672167A50F00DDEECF /* AAKNavigationController.m */; };
+		72F98A4021834AD700ABBECA /* CocoImageDownloader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 72F98A3321834AD600ABBECA /* CocoImageDownloader.mm */; };
+		72F98A4121834AD700ABBECA /* CocoVComponet.mm in Sources */ = {isa = PBXBuildFile; fileRef = 72F98A3521834AD600ABBECA /* CocoVComponet.mm */; };
+		72F98A4221834AD700ABBECA /* CocoVContentComponet.mm in Sources */ = {isa = PBXBuildFile; fileRef = 72F98A3721834AD600ABBECA /* CocoVContentComponet.mm */; };
+		72F98A4321834AD700ABBECA /* CocoVFooterComponet.mm in Sources */ = {isa = PBXBuildFile; fileRef = 72F98A3921834AD700ABBECA /* CocoVFooterComponet.mm */; };
+		72F98A4421834AD700ABBECA /* CocoVHeaderComponet.mm in Sources */ = {isa = PBXBuildFile; fileRef = 72F98A3B21834AD700ABBECA /* CocoVHeaderComponet.mm */; };
+		72F98A4521834AD700ABBECA /* CocoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 72F98A3D21834AD700ABBECA /* CocoModel.m */; };
+		72F98A4621834AD700ABBECA /* CocoVC.mm in Sources */ = {isa = PBXBuildFile; fileRef = 72F98A3F21834AD700ABBECA /* CocoVC.mm */; };
 		FCBB63C620E32A71F262BF37 /* libPods-AsyncApplicationKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 63AA948FD82474C2C5467CEB /* libPods-AsyncApplicationKit.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		01F6B987FBB878DF5658093E /* Pods-AsyncApplicationKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AsyncApplicationKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AsyncApplicationKit/Pods-AsyncApplicationKit.debug.xcconfig"; sourceTree = "<group>"; };
 		63AA948FD82474C2C5467CEB /* libPods-AsyncApplicationKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AsyncApplicationKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		72078492217B048900B6EFA7 /* MCAVPlayerItemCacheLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAVPlayerItemCacheLoader.h; sourceTree = "<group>"; };
-		72078493217B048900B6EFA7 /* MCAVPlayerItemCacheTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAVPlayerItemCacheTask.h; sourceTree = "<group>"; };
-		72078494217B048900B6EFA7 /* MCAVPlayerItemRemoteCacheTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCAVPlayerItemRemoteCacheTask.m; sourceTree = "<group>"; };
-		72078495217B048900B6EFA7 /* MCCacheSupportUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCacheSupportUtils.m; sourceTree = "<group>"; };
-		72078496217B048900B6EFA7 /* MCAVPlayerItemLocalCacheTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAVPlayerItemLocalCacheTask.h; sourceTree = "<group>"; };
-		72078497217B048900B6EFA7 /* MCAVPlayerItemCacheFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAVPlayerItemCacheFile.h; sourceTree = "<group>"; };
-		72078498217B048900B6EFA7 /* MCAVPlayerItemCacheTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCAVPlayerItemCacheTask.m; sourceTree = "<group>"; };
-		72078499217B048900B6EFA7 /* MCAVPlayerItemCacheLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCAVPlayerItemCacheLoader.m; sourceTree = "<group>"; };
-		7207849A217B048900B6EFA7 /* MCAVPlayerItemCacheFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCAVPlayerItemCacheFile.m; sourceTree = "<group>"; };
-		7207849B217B048900B6EFA7 /* MCAVPlayerItemLocalCacheTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCAVPlayerItemLocalCacheTask.m; sourceTree = "<group>"; };
-		7207849C217B048900B6EFA7 /* MCCacheSupportUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCacheSupportUtils.h; sourceTree = "<group>"; };
-		7207849D217B048900B6EFA7 /* MCAVPlayerItemRemoteCacheTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAVPlayerItemRemoteCacheTask.h; sourceTree = "<group>"; };
-		7207849E217B048900B6EFA7 /* AVPlayerItem+MCCacheSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AVPlayerItem+MCCacheSupport.m"; sourceTree = "<group>"; };
-		7207849F217B048900B6EFA7 /* AVPlayerItem+MCCacheSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AVPlayerItem+MCCacheSupport.h"; sourceTree = "<group>"; };
 		72917B4C216A5F4B002AD5A7 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
 		72917B4D216A5F4B002AD5A7 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		72E72535215787A600DDEECF /* AsyncApplicationKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AsyncApplicationKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,6 +46,20 @@
 		72E725642167A47B00DDEECF /* AAKDispatchQueue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AAKDispatchQueue.m; sourceTree = "<group>"; };
 		72E725662167A50F00DDEECF /* AAKNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AAKNavigationController.h; sourceTree = "<group>"; };
 		72E725672167A50F00DDEECF /* AAKNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AAKNavigationController.m; sourceTree = "<group>"; };
+		72F98A3221834AD600ABBECA /* CocoImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoImageDownloader.h; sourceTree = "<group>"; };
+		72F98A3321834AD600ABBECA /* CocoImageDownloader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CocoImageDownloader.mm; sourceTree = "<group>"; };
+		72F98A3421834AD600ABBECA /* CocoVComponet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoVComponet.h; sourceTree = "<group>"; };
+		72F98A3521834AD600ABBECA /* CocoVComponet.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CocoVComponet.mm; sourceTree = "<group>"; };
+		72F98A3621834AD600ABBECA /* CocoVContentComponet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoVContentComponet.h; sourceTree = "<group>"; };
+		72F98A3721834AD600ABBECA /* CocoVContentComponet.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CocoVContentComponet.mm; sourceTree = "<group>"; };
+		72F98A3821834AD700ABBECA /* CocoVFooterComponet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoVFooterComponet.h; sourceTree = "<group>"; };
+		72F98A3921834AD700ABBECA /* CocoVFooterComponet.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CocoVFooterComponet.mm; sourceTree = "<group>"; };
+		72F98A3A21834AD700ABBECA /* CocoVHeaderComponet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoVHeaderComponet.h; sourceTree = "<group>"; };
+		72F98A3B21834AD700ABBECA /* CocoVHeaderComponet.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CocoVHeaderComponet.mm; sourceTree = "<group>"; };
+		72F98A3C21834AD700ABBECA /* CocoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoModel.h; sourceTree = "<group>"; };
+		72F98A3D21834AD700ABBECA /* CocoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CocoModel.m; sourceTree = "<group>"; };
+		72F98A3E21834AD700ABBECA /* CocoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoVC.h; sourceTree = "<group>"; };
+		72F98A3F21834AD700ABBECA /* CocoVC.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CocoVC.mm; sourceTree = "<group>"; };
 		E8839EB95907306EC86BFBB9 /* Pods-AsyncApplicationKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AsyncApplicationKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-AsyncApplicationKit/Pods-AsyncApplicationKit.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,35 +84,6 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		72078490217B048900B6EFA7 /* AVPlayerCacheSupport */ = {
-			isa = PBXGroup;
-			children = (
-				72078491217B048900B6EFA7 /* Classes */,
-				7207849E217B048900B6EFA7 /* AVPlayerItem+MCCacheSupport.m */,
-				7207849F217B048900B6EFA7 /* AVPlayerItem+MCCacheSupport.h */,
-			);
-			path = AVPlayerCacheSupport;
-			sourceTree = "<group>";
-		};
-		72078491217B048900B6EFA7 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				72078492217B048900B6EFA7 /* MCAVPlayerItemCacheLoader.h */,
-				72078493217B048900B6EFA7 /* MCAVPlayerItemCacheTask.h */,
-				72078494217B048900B6EFA7 /* MCAVPlayerItemRemoteCacheTask.m */,
-				72078495217B048900B6EFA7 /* MCCacheSupportUtils.m */,
-				72078496217B048900B6EFA7 /* MCAVPlayerItemLocalCacheTask.h */,
-				72078497217B048900B6EFA7 /* MCAVPlayerItemCacheFile.h */,
-				72078498217B048900B6EFA7 /* MCAVPlayerItemCacheTask.m */,
-				72078499217B048900B6EFA7 /* MCAVPlayerItemCacheLoader.m */,
-				7207849A217B048900B6EFA7 /* MCAVPlayerItemCacheFile.m */,
-				7207849B217B048900B6EFA7 /* MCAVPlayerItemLocalCacheTask.m */,
-				7207849C217B048900B6EFA7 /* MCCacheSupportUtils.h */,
-				7207849D217B048900B6EFA7 /* MCAVPlayerItemRemoteCacheTask.h */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
 		72E7252C215787A600DDEECF = {
 			isa = PBXGroup;
 			children = (
@@ -134,7 +105,7 @@
 		72E72537215787A600DDEECF /* AsyncApplicationKit */ = {
 			isa = PBXGroup;
 			children = (
-				72078490217B048900B6EFA7 /* AVPlayerCacheSupport */,
+				72F98A3021834AD600ABBECA /* Coco */,
 				72E725622167448800DDEECF /* Core */,
 				72E72538215787A600DDEECF /* AppDelegate.h */,
 				72E72539215787A600DDEECF /* AppDelegate.m */,
@@ -161,6 +132,35 @@
 				72E725672167A50F00DDEECF /* AAKNavigationController.m */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		72F98A3021834AD600ABBECA /* Coco */ = {
+			isa = PBXGroup;
+			children = (
+				72F98A3121834AD600ABBECA /* CocoComponets */,
+				72F98A3C21834AD700ABBECA /* CocoModel.h */,
+				72F98A3D21834AD700ABBECA /* CocoModel.m */,
+				72F98A3E21834AD700ABBECA /* CocoVC.h */,
+				72F98A3F21834AD700ABBECA /* CocoVC.mm */,
+			);
+			path = Coco;
+			sourceTree = "<group>";
+		};
+		72F98A3121834AD600ABBECA /* CocoComponets */ = {
+			isa = PBXGroup;
+			children = (
+				72F98A3221834AD600ABBECA /* CocoImageDownloader.h */,
+				72F98A3321834AD600ABBECA /* CocoImageDownloader.mm */,
+				72F98A3421834AD600ABBECA /* CocoVComponet.h */,
+				72F98A3521834AD600ABBECA /* CocoVComponet.mm */,
+				72F98A3621834AD600ABBECA /* CocoVContentComponet.h */,
+				72F98A3721834AD600ABBECA /* CocoVContentComponet.mm */,
+				72F98A3821834AD700ABBECA /* CocoVFooterComponet.h */,
+				72F98A3921834AD700ABBECA /* CocoVFooterComponet.mm */,
+				72F98A3A21834AD700ABBECA /* CocoVHeaderComponet.h */,
+				72F98A3B21834AD700ABBECA /* CocoVHeaderComponet.mm */,
+			);
+			path = CocoComponets;
 			sourceTree = "<group>";
 		};
 		F9CF4C7266E97FA729A30641 /* Frameworks */ = {
@@ -262,20 +262,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				720784A0217B048900B6EFA7 /* MCAVPlayerItemRemoteCacheTask.m in Sources */,
 				72E725612165C14400DDEECF /* FirstViewController.m in Sources */,
+				72F98A4121834AD700ABBECA /* CocoVComponet.mm in Sources */,
 				72E72548215787A800DDEECF /* main.m in Sources */,
-				720784A1217B048900B6EFA7 /* MCCacheSupportUtils.m in Sources */,
-				720784A3217B048900B6EFA7 /* MCAVPlayerItemCacheLoader.m in Sources */,
 				72E7255E2165BDE000DDEECF /* AAKViewController.m in Sources */,
 				72917B4E216A5F4B002AD5A7 /* SecondViewController.m in Sources */,
-				720784A2217B048900B6EFA7 /* MCAVPlayerItemCacheTask.m in Sources */,
-				720784A5217B048900B6EFA7 /* MCAVPlayerItemLocalCacheTask.m in Sources */,
+				72F98A4021834AD700ABBECA /* CocoImageDownloader.mm in Sources */,
+				72F98A4621834AD700ABBECA /* CocoVC.mm in Sources */,
 				72E7253A215787A600DDEECF /* AppDelegate.m in Sources */,
+				72F98A4221834AD700ABBECA /* CocoVContentComponet.mm in Sources */,
+				72F98A4521834AD700ABBECA /* CocoModel.m in Sources */,
+				72F98A4321834AD700ABBECA /* CocoVFooterComponet.mm in Sources */,
 				72E725682167A50F00DDEECF /* AAKNavigationController.m in Sources */,
-				720784A6217B048900B6EFA7 /* AVPlayerItem+MCCacheSupport.m in Sources */,
+				72F98A4421834AD700ABBECA /* CocoVHeaderComponet.mm in Sources */,
 				72E725652167A47B00DDEECF /* AAKDispatchQueue.m in Sources */,
-				720784A4217B048900B6EFA7 /* MCAVPlayerItemCacheFile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
