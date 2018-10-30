@@ -10,30 +10,28 @@
 @implementation CocoVComponet
 +(instancetype)newWithModel:(CocoModel *)model context:(id<NSObject>)context
 {
-    CKFlexboxComponent *flex = [CKFlexboxComponent   newWithView:{
-                                                                        [UIView class],
-                                                                        { {@selector(setBackgroundColor:), [UIColor grayColor]},}
-                                                                    }
-                                                            size:{}
-                                                            style:{
-                                                                
-                                                                .direction = CKFlexboxDirectionColumn,
-                                                                .alignItems = CKFlexboxAlignItemsStretch,
-                                                                .spacing = 0
-                                                                
-                                                            }
-                                                        children:{
-                                                            
-                                                            {
-                                                                [CocoVHeaderComponet newWithModel:model context:context]
-                                                            },
-                                                            {
-                                                                [CocoVContentComponet newWithModel:model context:context]
-                                                            }
-                                                            
-                                                        }];
+    CKFlexboxComponent *flex =
+    [CKFlexboxComponent
+     newWithView:{
+         [UIView class],
+         { {@selector(setBackgroundColor:), [UIColor grayColor]},}
+     }
+     size:{}
+     style:{
+         .direction = CKFlexboxDirectionColumn,
+         .alignItems = CKFlexboxAlignItemsStretch,
+         .spacing = 0
+     }
+     children:{
+         {
+             [CocoVHeaderComponet newWithModel:model context:context]
+         },
+         {
+             [CocoVContentComponet newWithModel:model context:context]
+         }
+     }];
                                 
-                                return [super newWithComponent:flex];
-    
+    return [super newWithComponent:flex];
 }
+
 @end

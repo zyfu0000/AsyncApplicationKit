@@ -45,8 +45,12 @@
     [_componentDataSource addListener:self];
 
     _collectionView = collectionView;
-    _collectionView.dataSource = self;
-    [_collectionView registerClass:[CKCollectionViewDataSourceCell class] forCellWithReuseIdentifier:kReuseIdentifier];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self->_collectionView.dataSource = self;
+        [self->_collectionView registerClass:[CKCollectionViewDataSourceCell class] forCellWithReuseIdentifier:kReuseIdentifier];
+    });
+    
+    
 
     _attachController = [[CKComponentDataSourceAttachController alloc] init];
     _supplementaryViewDataSource = supplementaryViewDataSource;

@@ -8,5 +8,7 @@ target 'AsyncApplicationKit' do
     pod 'Aspects'
     pod 'KVOController'
     pod 'ComponentKit'
+    pod 'RSSwizzle'
+    pod 'JGMethodSwizzler'
 end
 

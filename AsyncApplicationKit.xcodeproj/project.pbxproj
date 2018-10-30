@@ -13,7 +13,7 @@
 		72E72545215787A800DDEECF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72E72543215787A800DDEECF /* LaunchScreen.storyboard */; };
 		72E72548215787A800DDEECF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 72E72547215787A800DDEECF /* main.m */; };
 		72E7255E2165BDE000DDEECF /* AAKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72E7255D2165BDE000DDEECF /* AAKViewController.m */; };
-		72E725612165C14400DDEECF /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72E725602165C14400DDEECF /* FirstViewController.m */; };
+		72E725612165C14400DDEECF /* FirstViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 72E725602165C14400DDEECF /* FirstViewController.mm */; };
 		72E725652167A47B00DDEECF /* AAKDispatchQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 72E725642167A47B00DDEECF /* AAKDispatchQueue.m */; };
 		72E725682167A50F00DDEECF /* AAKNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72E725672167A50F00DDEECF /* AAKNavigationController.m */; };
 		72F98A4021834AD700ABBECA /* CocoImageDownloader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 72F98A3321834AD600ABBECA /* CocoImageDownloader.mm */; };
@@ -23,6 +23,7 @@
 		72F98A4421834AD700ABBECA /* CocoVHeaderComponet.mm in Sources */ = {isa = PBXBuildFile; fileRef = 72F98A3B21834AD700ABBECA /* CocoVHeaderComponet.mm */; };
 		72F98A4521834AD700ABBECA /* CocoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 72F98A3D21834AD700ABBECA /* CocoModel.m */; };
 		72F98A4621834AD700ABBECA /* CocoVC.mm in Sources */ = {isa = PBXBuildFile; fileRef = 72F98A3F21834AD700ABBECA /* CocoVC.mm */; };
+		72F98A4B2188060B00ABBECA /* AAKCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72F98A4A2188060B00ABBECA /* AAKCollectionViewController.m */; };
 		FCBB63C620E32A71F262BF37 /* libPods-AsyncApplicationKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 63AA948FD82474C2C5467CEB /* libPods-AsyncApplicationKit.a */; };
 /* End PBXBuildFile section */
 
@@ -41,7 +42,7 @@
 		72E7255C2165BDE000DDEECF /* AAKViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AAKViewController.h; sourceTree = "<group>"; };
 		72E7255D2165BDE000DDEECF /* AAKViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AAKViewController.m; sourceTree = "<group>"; };
 		72E7255F2165C14400DDEECF /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		72E725602165C14400DDEECF /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		72E725602165C14400DDEECF /* FirstViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = FirstViewController.mm; sourceTree = "<group>"; };
 		72E725632167A47B00DDEECF /* AAKDispatchQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AAKDispatchQueue.h; sourceTree = "<group>"; };
 		72E725642167A47B00DDEECF /* AAKDispatchQueue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AAKDispatchQueue.m; sourceTree = "<group>"; };
 		72E725662167A50F00DDEECF /* AAKNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AAKNavigationController.h; sourceTree = "<group>"; };
@@ -60,6 +61,9 @@
 		72F98A3D21834AD700ABBECA /* CocoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CocoModel.m; sourceTree = "<group>"; };
 		72F98A3E21834AD700ABBECA /* CocoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoVC.h; sourceTree = "<group>"; };
 		72F98A3F21834AD700ABBECA /* CocoVC.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CocoVC.mm; sourceTree = "<group>"; };
+		72F98A472187326300ABBECA /* AsyncApplicationKit.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AsyncApplicationKit.pch; sourceTree = "<group>"; };
+		72F98A492188060B00ABBECA /* AAKCollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AAKCollectionViewController.h; sourceTree = "<group>"; };
+		72F98A4A2188060B00ABBECA /* AAKCollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AAKCollectionViewController.m; sourceTree = "<group>"; };
 		E8839EB95907306EC86BFBB9 /* Pods-AsyncApplicationKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AsyncApplicationKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-AsyncApplicationKit/Pods-AsyncApplicationKit.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,13 +114,14 @@
 				72E72538215787A600DDEECF /* AppDelegate.h */,
 				72E72539215787A600DDEECF /* AppDelegate.m */,
 				72E7255F2165C14400DDEECF /* FirstViewController.h */,
-				72E725602165C14400DDEECF /* FirstViewController.m */,
+				72E725602165C14400DDEECF /* FirstViewController.mm */,
 				72917B4C216A5F4B002AD5A7 /* SecondViewController.h */,
 				72917B4D216A5F4B002AD5A7 /* SecondViewController.m */,
 				72E72541215787A800DDEECF /* Assets.xcassets */,
 				72E72543215787A800DDEECF /* LaunchScreen.storyboard */,
 				72E72546215787A800DDEECF /* Info.plist */,
 				72E72547215787A800DDEECF /* main.m */,
+				72F98A472187326300ABBECA /* AsyncApplicationKit.pch */,
 			);
 			path = AsyncApplicationKit;
 			sourceTree = "<group>";
@@ -130,6 +135,8 @@
 				72E725642167A47B00DDEECF /* AAKDispatchQueue.m */,
 				72E725662167A50F00DDEECF /* AAKNavigationController.h */,
 				72E725672167A50F00DDEECF /* AAKNavigationController.m */,
+				72F98A492188060B00ABBECA /* AAKCollectionViewController.h */,
+				72F98A4A2188060B00ABBECA /* AAKCollectionViewController.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -262,7 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				72E725612165C14400DDEECF /* FirstViewController.m in Sources */,
+				72E725612165C14400DDEECF /* FirstViewController.mm in Sources */,
 				72F98A4121834AD700ABBECA /* CocoVComponet.mm in Sources */,
 				72E72548215787A800DDEECF /* main.m in Sources */,
 				72E7255E2165BDE000DDEECF /* AAKViewController.m in Sources */,
@@ -271,6 +278,7 @@
 				72F98A4621834AD700ABBECA /* CocoVC.mm in Sources */,
 				72E7253A215787A600DDEECF /* AppDelegate.m in Sources */,
 				72F98A4221834AD700ABBECA /* CocoVContentComponet.mm in Sources */,
+				72F98A4B2188060B00ABBECA /* AAKCollectionViewController.m in Sources */,
 				72F98A4521834AD700ABBECA /* CocoModel.m in Sources */,
 				72F98A4321834AD700ABBECA /* CocoVFooterComponet.mm in Sources */,
 				72E725682167A50F00DDEECF /* AAKNavigationController.m in Sources */,
@@ -410,6 +418,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V4CBDCFQ88;
+				GCC_PREFIX_HEADER = AsyncApplicationKit/AsyncApplicationKit.pch;
 				INFOPLIST_FILE = AsyncApplicationKit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -428,6 +437,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V4CBDCFQ88;
+				GCC_PREFIX_HEADER = AsyncApplicationKit/AsyncApplicationKit.pch;
 				INFOPLIST_FILE = AsyncApplicationKit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

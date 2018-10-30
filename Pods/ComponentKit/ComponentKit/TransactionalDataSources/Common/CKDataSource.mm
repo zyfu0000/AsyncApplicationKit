@@ -109,7 +109,7 @@ typedef NS_ENUM(NSInteger, NextPipelineState) {
                   mode:(CKUpdateMode)mode
               userInfo:(NSDictionary *)userInfo
 {
-  CKAssertMainThread();
+//  CKAssertMainThread();
 
   verifyChangeset(changeset, _state, _pendingAsynchronousModifications);
 
@@ -172,13 +172,13 @@ typedef NS_ENUM(NSInteger, NextPipelineState) {
 
 - (void)addListener:(id<CKDataSourceListener>)listener
 {
-  CKAssertMainThread();
+//  CKAssertMainThread();
   [_announcer addListener:listener];
 }
 
 - (void)removeListener:(id<CKDataSourceListener>)listener
 {
-  CKAssertMainThread();
+//  CKAssertMainThread();
   [_announcer removeListener:listener];
 }
 
@@ -215,7 +215,7 @@ typedef NS_ENUM(NSInteger, NextPipelineState) {
 
 - (void)_enqueueModification:(id<CKDataSourceStateModifying>)modification
 {
-  CKAssertMainThread();
+//  CKAssertMainThread();
 
   [_pendingAsynchronousModifications addObject:modification];
   if (_pendingAsynchronousModifications.count == 1) {
@@ -225,7 +225,7 @@ typedef NS_ENUM(NSInteger, NextPipelineState) {
 
 - (void)_startAsynchronousModificationIfNeeded
 {
-  CKAssertMainThread();
+//  CKAssertMainThread();
 
   if (_pendingAsynchronousModifications.count > 0) {
     CKDataSourceModificationPair *modificationPair =

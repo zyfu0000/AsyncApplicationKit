@@ -55,7 +55,7 @@
     self.dataSource = mDataSource;
     
     NSMutableDictionary *mmDic = [NSMutableDictionary dictionaryWithCapacity:20];
-    for (int i=0; i<2; i++) //准备20个测试数据
+    for (int i=0; i<20; i++) //准备20个测试数据
     {
         NSIndexPath *indexpathi =[NSIndexPath indexPathForRow:i inSection:0];
         
@@ -82,7 +82,7 @@
                                                                           insertedSections:zeroSet
                                                                              insertedItems:mmDic];
     
-    [self.dataSource applyChangeset:changeSet mode:CKUpdateModeSynchronous userInfo:nil] ;
+    [self.dataSource applyChangeset:changeSet mode:CKUpdateModeAsynchronous userInfo:nil] ;
 
 }
 

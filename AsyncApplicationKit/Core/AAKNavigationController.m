@@ -31,7 +31,7 @@
 {
     self = [super init];
     
-    self.navigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController.viewController];
+    self.navigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController.vc];
     
     rootViewController.navigationController = self;
     
@@ -46,7 +46,7 @@
     [self.vcs addObject:viewController];
     
     [AAKDispatchQueue asyncMain:^{
-        [self.navigationController pushViewController:viewController.viewController animated:animated];
+        [self.navigationController pushViewController:viewController.vc animated:animated];
     }];
 }
 
@@ -56,7 +56,7 @@
     [self.vcs removeObject:vc];
     
     [AAKDispatchQueue asyncMain:^{
-        [self.navigationController pushViewController:vc.viewController animated:animated];
+        [self.navigationController pushViewController:vc.vc animated:animated];
     }];
     
     return vc;

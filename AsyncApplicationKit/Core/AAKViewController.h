@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "AAKNavigationController.h"
+#import "AAKCollectionViewController.h"
 
 @interface AAKViewController : NSObject
 
-@property (nonatomic, strong, readonly) UIViewController *viewController;
+@property (nonatomic, strong, readonly) AAKCollectionViewController *vc;
 @property (nonatomic, weak) AAKNavigationController *navigationController;
 
 - (void)viewDidLoad;
