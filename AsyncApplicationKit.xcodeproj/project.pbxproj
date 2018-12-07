@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		72917B4E216A5F4B002AD5A7 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72917B4D216A5F4B002AD5A7 /* SecondViewController.m */; };
+		72917B4E216A5F4B002AD5A7 /* SecondViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 72917B4D216A5F4B002AD5A7 /* SecondViewController.mm */; };
 		72E7253A215787A600DDEECF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 72E72539215787A600DDEECF /* AppDelegate.m */; };
 		72E72542215787A800DDEECF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72E72541215787A800DDEECF /* Assets.xcassets */; };
 		72E72545215787A800DDEECF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72E72543215787A800DDEECF /* LaunchScreen.storyboard */; };
@@ -31,7 +31,7 @@
 		01F6B987FBB878DF5658093E /* Pods-AsyncApplicationKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AsyncApplicationKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AsyncApplicationKit/Pods-AsyncApplicationKit.debug.xcconfig"; sourceTree = "<group>"; };
 		63AA948FD82474C2C5467CEB /* libPods-AsyncApplicationKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AsyncApplicationKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		72917B4C216A5F4B002AD5A7 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		72917B4D216A5F4B002AD5A7 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		72917B4D216A5F4B002AD5A7 /* SecondViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SecondViewController.mm; sourceTree = "<group>"; };
 		72E72535215787A600DDEECF /* AsyncApplicationKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AsyncApplicationKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72E72538215787A600DDEECF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		72E72539215787A600DDEECF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -116,7 +116,7 @@
 				72E7255F2165C14400DDEECF /* FirstViewController.h */,
 				72E725602165C14400DDEECF /* FirstViewController.mm */,
 				72917B4C216A5F4B002AD5A7 /* SecondViewController.h */,
-				72917B4D216A5F4B002AD5A7 /* SecondViewController.m */,
+				72917B4D216A5F4B002AD5A7 /* SecondViewController.mm */,
 				72E72541215787A800DDEECF /* Assets.xcassets */,
 				72E72543215787A800DDEECF /* LaunchScreen.storyboard */,
 				72E72546215787A800DDEECF /* Info.plist */,
@@ -273,7 +273,7 @@
 				72F98A4121834AD700ABBECA /* CocoVComponet.mm in Sources */,
 				72E72548215787A800DDEECF /* main.m in Sources */,
 				72E7255E2165BDE000DDEECF /* AAKViewController.m in Sources */,
-				72917B4E216A5F4B002AD5A7 /* SecondViewController.m in Sources */,
+				72917B4E216A5F4B002AD5A7 /* SecondViewController.mm in Sources */,
 				72F98A4021834AD700ABBECA /* CocoImageDownloader.mm in Sources */,
 				72F98A4621834AD700ABBECA /* CocoVC.mm in Sources */,
 				72E7253A215787A600DDEECF /* AppDelegate.m in Sources */,

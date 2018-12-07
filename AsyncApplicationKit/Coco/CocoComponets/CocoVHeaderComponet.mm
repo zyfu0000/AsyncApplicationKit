@@ -7,6 +7,13 @@
 #import <ComponentKit/CKComponentSubclass.h>
 #import "CocoVHeaderComponet.h"
 #import "CocoImageDownloader.h"
+
+@interface CocoVHeaderComponet ()
+
+@property (nonatomic, copy) void (^avatarTappedBlock)();
+
+@end
+
 @implementation CocoVHeaderComponet
 +(instancetype)newWithModel:(CocoModel *)model context:(id<NSObject>)context
 {
@@ -80,22 +87,23 @@
     
     
     
-    CKFlexboxComponent *flex = [CKFlexboxComponent   newWithView:{
-                                                                        [UIView class],
-                                                                        {
-                                                                            {@selector(setBackgroundColor:), [UIColor orangeColor]},
-                                                                        }
-                                                                    }
-                                                            size:{}
-                                                           style:{.direction = CKFlexboxDirectionRow}
-                                                        children:{
-                                                            {img},
-                                                            {
-                                                                nameInset,
-                                                                .flexGrow = 2,
-                                                                .alignSelf = CKFlexboxAlignSelfCenter
-                                                            }
-                                                        }];
+    CKFlexboxComponent *flex = [CKFlexboxComponent
+                                newWithView:{
+                                    [UIView class],
+                                    {
+                                        {@selector(setBackgroundColor:), [UIColor orangeColor]},
+                                    }
+                                }
+                                size:{}
+                                style:{.direction = CKFlexboxDirectionRow}
+                                children:{
+                                    {img},
+                                    {
+                                        nameInset,
+                                        .flexGrow = 2,
+                                        .alignSelf = CKFlexboxAlignSelfCenter
+                                    }
+                                }];
     CKInsetComponent *flesInset = [CKInsetComponent newWithInsets:UIEdgeInsetsMake(20, 0, 20, 0) component:flex];
 
 
@@ -113,7 +121,9 @@
     NSLog(@"didTap");
     [self updateState:^(NSNumber *oldState){
         return [oldState boolValue] ? @NO : @YES;
-    } mode:CKUpdateModeSynchronous];
+    } mode:CKUpdateModeAsynchronous];
+    
+    
 }
 
 //- (std::vector<CKComponentAnimation>)animationsFromPreviousComponent:(InteractiveQuoteComponent *)previousComponent
