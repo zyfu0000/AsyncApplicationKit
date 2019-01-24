@@ -17,5 +17,5 @@ typedef NS_ENUM(NSUInteger, myLayoutStyle) {
 @property(nonatomic,strong) NSString *name;
 @property(nonatomic,assign) NSInteger num;
 @property(nonatomic,assign) myLayoutStyle layoutStyle;
-@property (nonatomic, copy) void (^avatarTappedBlock)();
+@property (nonatomic, copy) void (^avatarTappedBlock)(void);
 @end

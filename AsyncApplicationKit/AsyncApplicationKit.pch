@@ -9,4 +9,15 @@
 #ifndef AsyncApplicationKit_pch
 #define AsyncApplicationKit_pch
 
+#import <Foundation/Foundation.h>
+
+@class NSError;
+typedef void (^GWNCommonBlockType)(NSError *error, id obj);
+typedef void (^GWNVoidBlockType)(void);
+typedef void (^GWNBoolBlockType)(BOOL result);
+typedef void (^GWNErrorBlockType)(NSError *error);
+typedef void (^GWNIntBlockType)(int);
+typedef void (^GWNUInt64BlockType)(uint64_t);
+typedef void (^GWNObjBlockType)(id obj);
+
 #endif /* AsyncApplicationKit_pch */
