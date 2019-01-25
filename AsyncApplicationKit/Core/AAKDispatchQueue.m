@@ -23,19 +23,9 @@
     dispatch_async(queue, block);
 }
 
-#define AsyncCall(call) \
-dispatch_queue_t queue = YYDispatchQueueGetForQOS(NSQualityOfServiceUtility); \
-dispatch_async(queue, ^{ \
-    call;\
-});\
-
-#define AsyncCallWithCompletion(call, block) \
-dispatch_queue_t queue = YYDispatchQueueGetForQOS(NSQualityOfServiceUtility); \
-dispatch_async(queue, ^{ \
-    call;\
-    if (block) { \
-        block();\
-    }\
-});\
++ (dispatch_queue_t)getDispatchQueue:(NSQualityOfService)qos
+{
+    return YYDispatchQueueGetForQOS(qos);
+}
 
 @end
