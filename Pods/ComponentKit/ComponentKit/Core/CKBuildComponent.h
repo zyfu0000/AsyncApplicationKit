@@ -13,9 +13,26 @@
 #import <ComponentKit/CKComponentScopeTypes.h>
 #import <ComponentKit/CKComponentBoundsAnimation.h>
 #import <ComponentKit/CKComponentLayout.h>
+#import <ComponentKit/CKTreeNodeProtocol.h>
 
 @class CKComponentScopeRoot;
 @class CKComponent;
+
+enum class BuildTrigger {
+  NewTree,
+  StateUpdate,
+  PropsUpdate,
+};
+
+/**
+ A configuration struct for the build component method.
+ **/
+struct CKBuildComponentConfig {
+  //  Enable faster state updates optimization for render components.
+  BOOL enableFasterStateUpdates = NO;
+  //  Enable faster props updates optimization for render components.
+  BOOL enableFasterPropsUpdates = NO;
+};
 
 /**
  The results of a build operation.
@@ -36,12 +53,12 @@ struct CKBuildComponentResult {
  @param previousRoot The previous scope root that was associated with the cell. May be nil if no prior root is available
  @param stateUpdates A map of state updates that have accumulated since the last component generation was constructed.
  @param componentFactory A block that constructs your component. Must not be nil.
- @param forceParent Defines whether the component tree (CKTreeNode) should ALWAYS use parent based nodes.
+ @param config Provides extra build configuration.
  */
 CKBuildComponentResult CKBuildComponent(CKComponentScopeRoot *previousRoot,
                                         const CKComponentStateUpdateMap &stateUpdates,
                                         CKComponent *(^componentFactory)(void),
-                                        BOOL forceParent = NO);
+                                        CKBuildComponentConfig config = {});
 
 /**
  The results of a build and layout operation.
@@ -56,7 +73,7 @@ CKBuildComponentResult CKBuildComponent(CKComponentScopeRoot *previousRoot,
 
 struct CKBuildAndLayoutComponentResult {
   CKBuildComponentResult buildComponentResult;
-  CKComponentLayout computedLayout;
+  CKComponentRootLayout computedLayout;
 };
 
 /**
@@ -67,7 +84,7 @@ struct CKBuildAndLayoutComponentResult {
  @param stateUpdates A map of state updates that have accumulated since the last component generation was constructed.
  @param sizeRange The size range to compute the component layout within.
  @param componentFactory A block that constructs your component. Must not be nil.
- @param forceParent Defines whether the component tree (CKTreeNode) should ALWAYS use parent based nodes.
+ @param config Provides extra build configuration.
 
  THIS IS EXPERIMENTAL, LINKED WITH THE DEFERRED CHILD COMPONENT CREATION (-render:() RFC) - DO NOT USE DIRECTLY
  */
@@ -77,4 +94,5 @@ CKBuildAndLayoutComponentResult CKBuildAndLayoutComponent(CKComponentScopeRoot *
                                                           const CKComponentStateUpdateMap &stateUpdates,
                                                           const CKSizeRange &sizeRange,
                                                           CKComponent *(^componentFactory)(void),
-                                                          BOOL forceParent = NO);
+                                                          const std::unordered_set<CKComponentPredicate> &layoutPredicates,
+                                                          CKBuildComponentConfig config = {});

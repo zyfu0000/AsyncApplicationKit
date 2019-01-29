@@ -22,6 +22,7 @@ BOOL CKComponentBoundsAnimationPredicate(id<CKComponentProtocol> component);
 
 auto CKComponentHasAnimationsOnInitialMountPredicate(id<CKComponentProtocol> const c) -> BOOL;
 auto CKComponentHasAnimationsFromPreviousComponentPredicate(id<CKComponentProtocol> const c) -> BOOL;
+auto CKComponentHasAnimationsOnFinalUnmountPredicate(id<CKComponentProtocol> const c) -> BOOL;
 
 /**
  A predicate that identifies a component that it's controller overrides the 'didPrepareLayout:forComponent:' method.
@@ -36,4 +37,4 @@ CKComponentBoundsAnimation CKComponentBoundsAnimationFromPreviousScopeRoot(CKCom
 /**
  Iterates over the components that their controller overrides 'didPrepareLayout:ForComponent:' and send the callback.
  */
-void CKComponentSendDidPrepareLayoutForComponent(CKComponentScopeRoot *scopeRoot, const CKComponentLayout layout);
+void CKComponentSendDidPrepareLayoutForComponent(CKComponentScopeRoot *scopeRoot, const CKComponentRootLayout &layout);

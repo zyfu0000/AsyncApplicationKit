@@ -1,1 +1,1 @@
-../../../ComponentKit/ComponentKit/Core/CKRenderWithChildrenComponent.h
+../../../ComponentKit/ComponentKit/Core/Render/CKRenderWithChildrenComponent.h

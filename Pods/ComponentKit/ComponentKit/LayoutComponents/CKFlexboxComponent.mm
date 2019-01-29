@@ -10,6 +10,8 @@
 
 #import "CKFlexboxComponent.h"
 
+#import <ComponentKit/CKMacros.h>
+
 #import "yoga/Yoga.h"
 
 #import "CKComponent+Yoga.h"
@@ -84,7 +86,7 @@ template class std::vector<CKFlexboxComponentChild>;
                    children:(CKContainerWrapper<std::vector<CKFlexboxComponentChild>> &&)children
           usesDeepYogaTrees:(BOOL)usesDeepYogaTrees
 {
-  CKFlexboxComponent * const component = [super newWithView:view size:size];
+  auto const component = [super newWithView:view size:size];
   if (component) {
     component->_style = style;
     component->_children = children.take();
@@ -93,31 +95,11 @@ template class std::vector<CKFlexboxComponentChild>;
   return component;
 }
 
-- (void)buildComponentTree:(id<CKTreeNodeWithChildrenProtocol>)owner
-             previousOwner:(id<CKTreeNodeWithChildrenProtocol>)previousOwner
-                 scopeRoot:(CKComponentScopeRoot *)scopeRoot
-              stateUpdates:(const CKComponentStateUpdateMap &)stateUpdates
-               forceParent:(BOOL)forceParent
+- (std::vector<CKComponent *>)renderChildren:(id)state
 {
-
-  if (forceParent) {
-    auto const node = [[CKTreeNodeWithChildren alloc]
-                       initWithComponent:self
-                       owner:owner
-                       previousOwner:previousOwner
-                       scopeRoot:scopeRoot
-                       stateUpdates:stateUpdates];
-
-    auto const previousOwnerForChild = (id<CKTreeNodeWithChildrenProtocol>)[previousOwner childForComponentKey:[node componentKey]];
-    for (auto const &child : _children) {
-      [child.component buildComponentTree:node previousOwner:previousOwnerForChild scopeRoot:scopeRoot stateUpdates:stateUpdates forceParent:forceParent];
-    }
-  } else {
-    [super buildComponentTree:owner previousOwner:previousOwner scopeRoot:scopeRoot stateUpdates:stateUpdates forceParent:forceParent];
-    for (auto const &child : _children) {
-      [child.component buildComponentTree:owner previousOwner:previousOwner scopeRoot:scopeRoot stateUpdates:stateUpdates forceParent:forceParent];
-    }
-  }
+  return CK::map(_children, [](auto const child) {
+    return child.component;
+  });
 }
 
 static float convertFloatToYogaRepresentation(const float& value) {

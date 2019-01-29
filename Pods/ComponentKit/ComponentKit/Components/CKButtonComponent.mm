@@ -43,6 +43,11 @@ typedef std::array<CKStateConfiguration, 8> CKStateConfigurationArray;
 }
 @end
 
+@interface CKButtonWithExtendedTapArea : UIButton
+/// The outset for tap target expansion
+@property (nonatomic, assign) UIEdgeInsets tapTargetExpansion;
+@end
+
 @implementation CKButtonComponent
 {
   CGSize _intrinsicSize;
@@ -57,6 +62,10 @@ typedef std::array<CKStateConfiguration, 8> CKStateConfigurationArray;
 
   static const CKComponentViewAttribute numberOfLinesAttribute = {"CKButtonComponent.numberOfLines", ^(UIButton *button, id value) {
     button.titleLabel.numberOfLines = [value integerValue];
+  }};
+
+  static const CKComponentViewAttribute lineBreakModeAttribute = {"CKButtonComponent.lineBreakMode", ^(UIButton *button, id value) {
+    button.titleLabel.lineBreakMode = (NSLineBreakMode)[value integerValue];
   }};
 
   static const CKComponentViewAttribute configurationAttribute = {
@@ -123,11 +132,13 @@ typedef std::array<CKStateConfiguration, 8> CKStateConfigurationArray;
     {configurationAttribute, configurationFromOptions(options)},
     {titleFontAttribute, options.titleFont},
     {numberOfLinesAttribute, options.numberOfLines},
+    {lineBreakModeAttribute, options.lineBreakMode},
     {@selector(setSelected:), options.selected},
     {@selector(setEnabled:), options.enabled},
     {@selector(setContentEdgeInsets:), contentEdgeInsets},
     {@selector(setTitleEdgeInsets:), titleEdgeInsets},
     {@selector(setImageEdgeInsets:), imageEdgeInsets},
+    {@selector(setTapTargetExpansion:), options.tapTargetExpansion},
     CKComponentActionAttribute(action, UIControlEventTouchUpInside),
   });
 
@@ -140,7 +151,7 @@ typedef std::array<CKStateConfiguration, 8> CKStateConfigurationArray;
 
   const auto b = [super
                   newWithView:{
-                    [UIButton class],
+                    [CKButtonWithExtendedTapArea class],
                     std::move(attributes),
                     std::move(accessibilityContext)
                   }
@@ -288,3 +299,14 @@ static inline NSUInteger indexForState(UIControlState state)
 }
 
 @end
+
+@implementation CKButtonWithExtendedTapArea : UIButton
+
+-(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
+{
+  return CGRectContainsPoint(UIEdgeInsetsInsetRect(self.bounds, self.tapTargetExpansion), point);
+}
+
+@end
+
+

@@ -15,6 +15,11 @@
 @class CAAnimation;
 @class CKComponent;
 
+struct CKComponentFinalUnmountAnimation {
+  CKComponent *component;
+  CAAnimation *animation;
+};
+
 struct CKComponentAnimation {
 
   /**
@@ -36,6 +41,9 @@ struct CKComponentAnimation {
    */
   CKComponentAnimation(CKComponent *component, CAAnimation *animation, NSString *layerPath = nil) noexcept;
   
+  /** Creates a CKComponentAnimation from CKComponentFinalUnmountAnimation */
+  CKComponentAnimation(const CKComponentFinalUnmountAnimation &animation, UIView *const hostView) noexcept;
+
   /** Creates a completely custom animation with arbitrary hooks. */
   CKComponentAnimation(const CKComponentAnimationHooks &hooks) noexcept;
 

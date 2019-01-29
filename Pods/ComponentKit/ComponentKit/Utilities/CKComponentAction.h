@@ -14,6 +14,8 @@
 #import <ComponentKit/CKComponentActionInternal.h>
 #import <objc/runtime.h>
 
+#pragma once
+
 @class CKComponent;
 
 namespace CK {
@@ -135,12 +137,25 @@ public:
     return CKAction<T...>(block);
   }
 
+  /** Like actionFromBlock, but allows passing a block that doesn't take a sender component. */
+  static CKAction<T...> actionFromSenderlessBlock(void (^block)(T...)) {
+    if (!block) {
+      return {};
+    }
+    return CKAction<T...>::actionFromBlock(^(CKComponent* sender, T... args) {
+      block(args...);
+    });
+  }
+
   /**
    Allows demoting an action to a simpler action while supplying defaults for the values that won't be passed in.
    */
   template<typename... U>
   static CKAction<T...> demotedFrom(CKAction<T..., U...> action, U... defaults) {
     static_assert(!CK::detail::any_references<U...>::value, "Demoting an action with reference defaults is not allowed");
+    if (!action) {
+      return {};
+    }
     return CKAction<T...>::actionFromBlock(^(CKComponent *sender, T... args) {
       action.send(sender, args..., defaults...);
     });
@@ -148,6 +163,9 @@ public:
 
   template<typename... U>
   static CKAction<T..., U...> promotedFrom(CKAction<T...> action) {
+    if (!action) {
+      return {};
+    }
     return CKAction<T..., U...>::actionFromBlock(^(CKComponent* sender, T... argsT, U... argsU) {
       action.send(sender, argsT...);
     });

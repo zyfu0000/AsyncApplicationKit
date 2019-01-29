@@ -17,8 +17,7 @@
 #import "CKComponentInternal.h"
 #import "CKCompositeComponentInternal.h"
 #import "CKComponentSubclass.h"
-#import "CKTreeNode.h"
-#import "CKRenderTreeNodeWithChild.h"
+#import "CKRenderHelpers.h"
 
 @interface CKCompositeComponent ()
 {
@@ -72,38 +71,13 @@
   return _component;
 }
 
-- (void)buildComponentTree:(id<CKTreeNodeWithChildrenProtocol>)owner
-             previousOwner:(id<CKTreeNodeWithChildrenProtocol>)previousOwner
-                 scopeRoot:(CKComponentScopeRoot *)scopeRoot
-              stateUpdates:(const CKComponentStateUpdateMap &)stateUpdates
-               forceParent:(BOOL)forceParent
+- (void)buildComponentTree:(id<CKTreeNodeWithChildrenProtocol>)parent
+            previousParent:(id<CKTreeNodeWithChildrenProtocol>)previousParent
+                    params:(const CKBuildComponentTreeParams &)params
+                    config:(const CKBuildComponentConfig &)config
+            hasDirtyParent:(BOOL)hasDirtyParent
 {
-  if (forceParent) {
-    auto const node = [[CKTreeNodeWithChild alloc]
-                       initWithComponent:self
-                       owner:owner
-                       previousOwner:previousOwner
-                       scopeRoot:scopeRoot
-                       stateUpdates:stateUpdates];
-
-    if (_component) {
-      [_component buildComponentTree:node
-                       previousOwner:(id<CKTreeNodeWithChildrenProtocol>)[previousOwner childForComponentKey:[node componentKey]]
-                           scopeRoot:scopeRoot
-                        stateUpdates:stateUpdates
-                         forceParent:forceParent];
-    }
-  } else {
-    [super buildComponentTree:owner previousOwner:previousOwner scopeRoot:scopeRoot stateUpdates:stateUpdates forceParent:forceParent];
-
-    if (_component) {
-      [_component buildComponentTree:owner
-                       previousOwner:previousOwner
-                           scopeRoot:scopeRoot
-                        stateUpdates:stateUpdates
-                         forceParent:forceParent];
-    }
-  }
+  CKRender::buildComponentTreeWithPrecomputedChild(self, _component, parent, previousParent, params, config, hasDirtyParent);
 }
 
 - (CKComponentLayout)computeLayoutThatFits:(CKSizeRange)constrainedSize

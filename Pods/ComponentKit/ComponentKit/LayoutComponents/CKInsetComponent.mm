@@ -57,7 +57,7 @@ static CGFloat centerInset(CGFloat outer, CGFloat inner)
   if (component == nil) {
     return nil;
   }
-  CKInsetComponent *c = [super newRenderComponentWithView:view size:{} isLayoutComponent:YES];
+  CKInsetComponent *c = [super newWithView:view size:{}];
   if (c) {
     c->_insets = insets;
     c->_component = component;
@@ -68,11 +68,6 @@ static CGFloat centerInset(CGFloat outer, CGFloat inner)
 + (instancetype)newWithView:(const CKComponentViewConfiguration &)view size:(const CKComponentSize &)size
 {
   CK_NOT_DESIGNATED_INITIALIZER();
-}
-
-+ (BOOL)isOwnerComponent
-{
-  return NO;
 }
 
 - (CKComponent *)render:(id)state

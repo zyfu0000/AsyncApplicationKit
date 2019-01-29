@@ -8,14 +8,16 @@
  *
  */
 
-#import <ComponentKit/CKComponent.h>
+#import <ComponentKit/CKRenderLayoutWithChildrenComponent.h>
+
+#import <ComponentKit/CKMacros.h>
 
 /**
  @uidocs https://fburl.com/CKBackgroundLayoutComponent:bf91
 
  Lays out a single child component, then lays out a background component behind it stretched to its size.
  */
-@interface CKBackgroundLayoutComponent : CKComponent
+@interface CKBackgroundLayoutComponent : CKRenderLayoutWithChildrenComponent
 
 /**
  @param component A child that is laid out to determine the size of this component. If this is nil, then this method
@@ -24,5 +26,8 @@
  */
 + (instancetype)newWithComponent:(CKComponent *)component
                       background:(CKComponent *)background;
+
++ (instancetype)newWithView:(const CKComponentViewConfiguration &)view
+                       size:(const CKComponentSize &)size CK_NOT_DESIGNATED_INITIALIZER_ATTRIBUTE;
 
 @end

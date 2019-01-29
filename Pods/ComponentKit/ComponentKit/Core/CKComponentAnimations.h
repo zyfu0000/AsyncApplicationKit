@@ -10,29 +10,47 @@
 
 #import <Foundation/Foundation.h>
 
+#import <unordered_map>
+
 #import <ComponentKit/CKComponentAnimation.h>
+#import <ComponentKit/CKComponentLayout.h>
 #import <ComponentKit/CKComponentTreeDiff.h>
+#import <ComponentKit/CKEqualityHashHelpers.h>
 
 @class CKComponentScopeRoot;
 
 struct CKComponentAnimations {
+  using AnimationsByComponentMap = std::unordered_map<CKComponent *, std::vector<CKComponentAnimation>, CK::hash<CKComponent *>, CK::is_equal<CKComponent *>>;
+
   CKComponentAnimations() {}
-  CKComponentAnimations(std::vector<CKComponentAnimation> animationsOnInitialMount,
-                        std::vector<CKComponentAnimation> animationsFromPreviousComponent)
-  : _animationsOnInitialMount(std::move(animationsOnInitialMount)), _animationsFromPreviousComponent(std::move(animationsFromPreviousComponent))
-  {}
+  CKComponentAnimations(AnimationsByComponentMap animationsOnInitialMount,
+                        AnimationsByComponentMap animationsFromPreviousComponent,
+                        AnimationsByComponentMap animationsOnFinalUnmount):
+  _animationsOnInitialMount(std::move(animationsOnInitialMount)),
+  _animationsFromPreviousComponent(std::move(animationsFromPreviousComponent)),
+  _animationsOnFinalUnmount(std::move(animationsOnFinalUnmount)) {}
 
   const auto &animationsOnInitialMount() const { return _animationsOnInitialMount; }
   const auto &animationsFromPreviousComponent() const { return _animationsFromPreviousComponent; }
+  const auto &animationsOnFinalUnmount() const { return _animationsOnFinalUnmount; }
+  auto isEmpty() const
+  {
+    return
+    _animationsOnInitialMount.empty() &&
+    _animationsFromPreviousComponent.empty() &&
+    _animationsOnFinalUnmount.empty();
+  }
+  auto description() const -> NSString *;
 
 private:
-  std::vector<CKComponentAnimation> _animationsOnInitialMount = {};
-  std::vector<CKComponentAnimation> _animationsFromPreviousComponent = {};
+  AnimationsByComponentMap _animationsOnInitialMount = {};
+  AnimationsByComponentMap _animationsFromPreviousComponent = {};
+  AnimationsByComponentMap _animationsOnFinalUnmount = {};
 };
 
 namespace CK {
-  auto animatedComponentsBetweenScopeRoots(CKComponentScopeRoot *const newRoot,
-                                           CKComponentScopeRoot *const previousRoot) -> ComponentTreeDiff;
+  auto animatedComponentsBetweenLayouts(const CKComponentRootLayout &newLayout,
+                                        const CKComponentRootLayout &previousLayout) -> ComponentTreeDiff;
 
-  auto animationsForComponents(const ComponentTreeDiff& animatedComponents) -> CKComponentAnimations;
+  auto animationsForComponents(const ComponentTreeDiff& animatedComponents, UIView *const hostView) -> CKComponentAnimations;
 }

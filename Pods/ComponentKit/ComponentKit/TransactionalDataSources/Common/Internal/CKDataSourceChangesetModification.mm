@@ -29,6 +29,7 @@
 #import "CKComponentScopeRootFactory.h"
 #import "CKDataSourceModificationHelper.h"
 #import "CKIndexSetDescription.h"
+#import "CKInvalidChangesetOperationType.h"
 
 @implementation CKDataSourceChangesetModification
 {
@@ -67,6 +68,7 @@
   CKDataSourceConfiguration *configuration = [oldState configuration];
   id<NSObject> context = [configuration context];
   const CKSizeRange sizeRange = [configuration sizeRange];
+  const auto animationPredicates = CKComponentAnimationPredicates(configuration.animationOptions);
 
   NSMutableArray *newSections = [NSMutableArray array];
   [[oldState sections] enumerateObjectsUsingBlock:^(NSArray *items, NSUInteger sectionIdx, BOOL *sectionStop) {
@@ -83,7 +85,7 @@
       std::lock_guard<std::mutex> lRead(_mutex);
       CKDataSourceItem *const oldItem = section[indexPath.item];
       dispatch_group_async(group, _queue, ^{
-        CKDataSourceItem *const item = CKBuildDataSourceItem([oldItem scopeRoot], {}, sizeRange, configuration, model, context);
+        CKDataSourceItem *const item = CKBuildDataSourceItem([oldItem scopeRoot], {}, sizeRange, configuration, model, context, animationPredicates);
         std::lock_guard<std::mutex> lWrite(_mutex);
         [section replaceObjectAtIndex:indexPath.item withObject:item];
       });
@@ -91,9 +93,27 @@
     dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
   } else {
     [[_changeset updatedItems] enumerateKeysAndObjectsUsingBlock:^(NSIndexPath *indexPath, id model, BOOL *stop) {
+      if (indexPath.section >= newSections.count) {
+        CKCFatalWithCategory(CKHumanReadableInvalidChangesetOperationType(CKInvalidChangesetOperationTypeUpdate),
+                             @"Invalid section: %lu (>= %lu). Changeset: %@, user info: %@, state: %@",
+                             (unsigned long)indexPath.section,
+                             (unsigned long)newSections.count,
+                             _changeset,
+                             _userInfo,
+                             oldState);
+      }
       NSMutableArray *const section = newSections[indexPath.section];
+      if (indexPath.item >= section.count) {
+        CKCFatalWithCategory(CKHumanReadableInvalidChangesetOperationType(CKInvalidChangesetOperationTypeUpdate),
+                             @"Invalid item: %lu (>= %lu). Changeset: %@, user info: %@, state: %@",
+                             (unsigned long)indexPath.item,
+                             (unsigned long)section.count,
+                             _changeset,
+                             _userInfo,
+                             oldState);
+      }
       CKDataSourceItem *const oldItem = section[indexPath.item];
-      CKDataSourceItem *const item = CKBuildDataSourceItem([oldItem scopeRoot], {}, sizeRange, configuration, model, context);
+      CKDataSourceItem *const item = CKBuildDataSourceItem([oldItem scopeRoot], {}, sizeRange, configuration, model, context, animationPredicates);
       [section replaceObjectAtIndex:indexPath.item withObject:item];
     }];
   }
@@ -112,19 +132,23 @@
   // Moves: first record as inserts for later processing
   [[_changeset movedItems] enumerateKeysAndObjectsUsingBlock:^(NSIndexPath *from, NSIndexPath *to, BOOL *stop) {
     if (from.section >= newSections.count) {
-      CKCFatal(@"Invalid section: %lu (>= %lu) while processing moved items. Changeset: %@, user info: %@",
-               (unsigned long)from.section,
-               (unsigned long)newSections.count,
-               CK::changesetDescription(_changeset),
-               _userInfo);
+      CKCFatalWithCategory(CKHumanReadableInvalidChangesetOperationType(CKInvalidChangesetOperationTypeMoveRow),
+                           @"Invalid section: %lu (>= %lu) while processing moved items. Changeset: %@, user info: %@, state: %@",
+                           (unsigned long)from.section,
+                           (unsigned long)newSections.count,
+                           CK::changesetDescription(_changeset),
+                           _userInfo,
+                           oldState);
     }
     const auto fromSection = static_cast<NSArray *>(newSections[from.section]);
     if (from.item >= fromSection.count) {
-      CKCFatal(@"Invalid item: %lu (>= %lu) while processing moved items. Changeset: %@, user info: %@",
-               (unsigned long)from.item,
-               (unsigned long)fromSection.count,
-               CK::changesetDescription(_changeset),
-               _userInfo);
+      CKCFatalWithCategory(CKHumanReadableInvalidChangesetOperationType(CKInvalidChangesetOperationTypeMoveRow),
+                           @"Invalid item: %lu (>= %lu) while processing moved items. Changeset: %@, user info: %@, state: %@",
+                           (unsigned long)from.item,
+                           (unsigned long)fromSection.count,
+                           CK::changesetDescription(_changeset),
+                           _userInfo,
+                           oldState);
     }
     insertedItemsBySection[to.section][to.row] = fromSection[from.item];
   }];
@@ -140,22 +164,26 @@
   }
   for (const auto &it : removedItemsBySection) {
     if (it.first >= newSections.count) {
-      CKCFatal(@"Invalid section: %lu (>= %lu) while processing moved items. Changeset: %@, user info: %@",
-               (unsigned long)it.first,
-               (unsigned long)newSections.count,
-               CK::changesetDescription(_changeset),
-               _userInfo);
+      CKCFatalWithCategory(CKHumanReadableInvalidChangesetOperationType(CKInvalidChangesetOperationTypeRemoveRow),
+                           @"Invalid section: %lu (>= %lu) while processing moved items. Changeset: %@, user info: %@, state: %@",
+                           (unsigned long)it.first,
+                           (unsigned long)newSections.count,
+                           CK::changesetDescription(_changeset),
+                           _userInfo,
+                           oldState);
     }
     const auto section = static_cast<NSMutableArray *>(newSections[it.first]);
 #ifdef CK_ASSERTIONS_ENABLED
     const auto invalidIndexes = CK::invalidIndexesForRemovalFromArray(section, it.second);
     if (invalidIndexes.count > 0) {
-      CKCFatal(@"%@ (>= %lu) in section: %lu. Changeset: %@, user info: %@",
-               CK::indexSetDescription(invalidIndexes, @"Invalid indexes", 0),
-               (unsigned long)section.count,
-               (unsigned long)it.first,
-               CK::changesetDescription(_changeset),
-               _userInfo);
+      CKCFatalWithCategory(CKHumanReadableInvalidChangesetOperationType(CKInvalidChangesetOperationTypeRemoveRow),
+                           @"%@ (>= %lu) in section: %lu. Changeset: %@, user info: %@, state: %@",
+                           CK::indexSetDescription(invalidIndexes, @"Invalid indexes", 0),
+                           (unsigned long)section.count,
+                           (unsigned long)it.first,
+                           CK::changesetDescription(_changeset),
+                           _userInfo,
+                           oldState);
     }
 #endif
     [section removeObjectsAtIndexes:it.second];
@@ -181,7 +209,8 @@
                                                              sizeRange,
                                                              configuration,
                                                              model,
-                                                             context);
+                                                             context,
+                                                             animationPredicates);
         std::lock_guard<std::mutex> l(_mutex);
         insertedItemsBySection[indexPath.section][indexPath.item] = item;
       });
@@ -196,7 +225,8 @@
                                                            sizeRange,
                                                            configuration,
                                                            model,
-                                                           context);
+                                                           context,
+                                                           animationPredicates);
       insertedItemsBySection[indexPath.section][indexPath.item] = item;
     }];
   }
@@ -209,16 +239,28 @@
       [indexes addIndex:itemIt.first];
       [items addObject:itemIt.second];
     }
+
+    if (sectionIt.first >= newSections.count) {
+      CKCFatalWithCategory(CKHumanReadableInvalidChangesetOperationType(CKInvalidChangesetOperationTypeInsertRow),
+                           @"Invalid section: %lu (>= %lu) while processing inserted items. Changeset: %@, user info: %@, state: %@",
+                           (unsigned long)sectionIt.first,
+                           (unsigned long)newSections.count,
+                           CK::changesetDescription(_changeset),
+                           _userInfo,
+                           oldState);
+    }
 #ifdef CK_ASSERTIONS_ENABLED
     const auto sectionItems = static_cast<NSArray *>([newSections objectAtIndex:sectionIt.first]);
     const auto invalidIndexes = CK::invalidIndexesForInsertionInArray(sectionItems, indexes);
     if (invalidIndexes.count > 0) {
-      CKCFatal(@"%@ for range: %@ in section: %lu. Changeset: %@, user info: %@",
-               CK::indexSetDescription(invalidIndexes, @"Invalid indexes", 0),
-               NSStringFromRange({0, sectionItems.count}),
-               (unsigned long)sectionIt.first,
-               CK::changesetDescription(_changeset),
-               _userInfo);
+      CKCFatalWithCategory(CKHumanReadableInvalidChangesetOperationType(CKInvalidChangesetOperationTypeInsertRow),
+                           @"%@ for range: %@ in section: %lu. Changeset: %@, user info: %@, state: %@",
+                           CK::indexSetDescription(invalidIndexes, @"Invalid indexes", 0),
+                           NSStringFromRange({0, sectionItems.count}),
+                           (unsigned long)sectionIt.first,
+                           CK::changesetDescription(_changeset),
+                           _userInfo,
+                           oldState);
     }
 #endif
     [[newSections objectAtIndex:sectionIt.first] insertObjects:items atIndexes:indexes];

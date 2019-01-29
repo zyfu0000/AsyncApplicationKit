@@ -1,44 +1,44 @@
 PODS:
   - Aspects (1.4.1)
-  - ComponentKit (0.23):
+  - ComponentKit (0.24):
     - Yoga (~> 1.6)
   - JGMethodSwizzler (2.0.1)
   - KVOController (1.2.0)
-  - libextobjc (0.4.1):
-    - libextobjc/EXTADT (= 0.4.1)
-    - libextobjc/EXTConcreteProtocol (= 0.4.1)
-    - libextobjc/EXTKeyPathCoding (= 0.4.1)
-    - libextobjc/EXTNil (= 0.4.1)
-    - libextobjc/EXTSafeCategory (= 0.4.1)
-    - libextobjc/EXTScope (= 0.4.1)
-    - libextobjc/EXTSelectorChecking (= 0.4.1)
-    - libextobjc/EXTSynthesize (= 0.4.1)
-    - "libextobjc/NSInvocation+EXT (= 0.4.1)"
-    - "libextobjc/NSMethodSignature+EXT (= 0.4.1)"
-    - libextobjc/RuntimeExtensions (= 0.4.1)
-    - libextobjc/UmbrellaHeader (= 0.4.1)
-  - libextobjc/EXTADT (0.4.1):
+  - libextobjc (0.6):
+    - libextobjc/EXTADT (= 0.6)
+    - libextobjc/EXTConcreteProtocol (= 0.6)
+    - libextobjc/EXTKeyPathCoding (= 0.6)
+    - libextobjc/EXTNil (= 0.6)
+    - libextobjc/EXTSafeCategory (= 0.6)
+    - libextobjc/EXTScope (= 0.6)
+    - libextobjc/EXTSelectorChecking (= 0.6)
+    - libextobjc/EXTSynthesize (= 0.6)
+    - "libextobjc/NSInvocation+EXT (= 0.6)"
+    - "libextobjc/NSMethodSignature+EXT (= 0.6)"
+    - libextobjc/RuntimeExtensions (= 0.6)
+    - libextobjc/UmbrellaHeader (= 0.6)
+  - libextobjc/EXTADT (0.6):
     - libextobjc/RuntimeExtensions
-  - libextobjc/EXTConcreteProtocol (0.4.1):
+  - libextobjc/EXTConcreteProtocol (0.6):
     - libextobjc/RuntimeExtensions
-  - libextobjc/EXTKeyPathCoding (0.4.1):
+  - libextobjc/EXTKeyPathCoding (0.6):
     - libextobjc/RuntimeExtensions
-  - libextobjc/EXTNil (0.4.1):
+  - libextobjc/EXTNil (0.6):
     - libextobjc/RuntimeExtensions
-  - libextobjc/EXTSafeCategory (0.4.1):
+  - libextobjc/EXTSafeCategory (0.6):
     - libextobjc/RuntimeExtensions
-  - libextobjc/EXTScope (0.4.1):
+  - libextobjc/EXTScope (0.6):
     - libextobjc/RuntimeExtensions
-  - libextobjc/EXTSelectorChecking (0.4.1):
+  - libextobjc/EXTSelectorChecking (0.6):
     - libextobjc/RuntimeExtensions
-  - libextobjc/EXTSynthesize (0.4.1):
+  - libextobjc/EXTSynthesize (0.6):
     - libextobjc/RuntimeExtensions
-  - "libextobjc/NSInvocation+EXT (0.4.1)":
+  - "libextobjc/NSInvocation+EXT (0.6)":
     - libextobjc/RuntimeExtensions
-  - "libextobjc/NSMethodSignature+EXT (0.4.1)":
+  - "libextobjc/NSMethodSignature+EXT (0.6)":
     - libextobjc/RuntimeExtensions
-  - libextobjc/RuntimeExtensions (0.4.1)
-  - libextobjc/UmbrellaHeader (0.4.1)
+  - libextobjc/RuntimeExtensions (0.6)
+  - libextobjc/UmbrellaHeader (0.6)
   - RSSwizzle (0.1.0)
   - Yoga (1.9.0)
   - YYDispatchQueuePool (1.0)
@@ -65,10 +65,10 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
-  ComponentKit: bf8b4c4e7448bd15b3a8e5a71174ea7aa6cea98d
+  ComponentKit: d6efb627aa2b4592cbe029d1e9e604226d39b5d9
   JGMethodSwizzler: e0ea5c1c6c55304ec4ef3f54e441400c6735c899
   KVOController: d72ace34afea42468329623b3379ab3cd1d286b6
-  libextobjc: a650fc1bf489a3d3a9bc2e621efa3e1006fc5471
+  libextobjc: aed8b7d2b07f511c1a7ecaacb33ea03e327c69b7
   RSSwizzle: d561958f595028bfcef98c7d55c318b3878a61c6
   Yoga: aaae8abea68951f60bee05f6277d3eed90bb91bb
   YYDispatchQueuePool: 3dfb2274bcc74207688dde8ac6f7bdd46871dd7b

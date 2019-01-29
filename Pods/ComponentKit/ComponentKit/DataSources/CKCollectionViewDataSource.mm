@@ -11,7 +11,7 @@
 #import "CKCollectionViewDataSource.h"
 
 #import "CKCollectionViewDataSourceCell.h"
-#import "CKDataSourceConfiguration.h"
+#import "CKDataSourceConfigurationInternal.h"
 #import "CKDataSourceListener.h"
 #import "CKDataSourceItem.h"
 #import "CKDataSourceState.h"
@@ -46,13 +46,12 @@
 
     _collectionView = collectionView;
     dispatch_async(dispatch_get_main_queue(), ^{
-        self->_collectionView.dataSource = self;
-        [self->_collectionView registerClass:[CKCollectionViewDataSourceCell class] forCellWithReuseIdentifier:kReuseIdentifier];
+        _collectionView.dataSource = self;
+        [_collectionView registerClass:[CKCollectionViewDataSourceCell class] forCellWithReuseIdentifier:kReuseIdentifier];
     });
-    
-    
 
-    _attachController = [[CKComponentDataSourceAttachController alloc] init];
+    _attachController = [CKComponentDataSourceAttachController
+                         newWithEnableNewAnimationInfrastructure:configuration.animationOptions.enableNewInfra];
     _supplementaryViewDataSource = supplementaryViewDataSource;
     _cellToItemMap = [NSMapTable weakToStrongObjectsMapTable];
   }
@@ -176,7 +175,7 @@ static void applyChangesToCollectionView(UICollectionView *collectionView,
 
 - (CGSize)sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-  return [_currentState objectAtIndexPath:indexPath].layout.size;
+  return [_currentState objectAtIndexPath:indexPath].rootLayout.size();
 }
 
 #pragma mark - Reload
@@ -237,7 +236,13 @@ static void attachToCell(CKCollectionViewDataSourceCell *cell,
                          CKComponentDataSourceAttachController *attachController,
                          NSMapTable<UICollectionViewCell *, CKDataSourceItem *> *cellToItemMap)
 {
-  [attachController attachComponentLayout:item.layout withScopeIdentifier:item.scopeRoot.globalIdentifier withBoundsAnimation:item.boundsAnimation toView:cell.rootView analyticsListener:item.scopeRoot.analyticsListener];
+  CKComponentDataSourceAttachControllerAttachComponentRootLayout(
+      attachController,
+      {.layoutProvider = item,
+       .scopeIdentifier = item.scopeRoot.globalIdentifier,
+       .boundsAnimation = item.boundsAnimation,
+       .view = cell.rootView,
+       .analyticsListener = item.scopeRoot.analyticsListener});
   [cellToItemMap setObject:item forKey:cell];
 }
 

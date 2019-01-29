@@ -23,10 +23,10 @@
 
 @protocol CKComponentProtocol;
 @protocol CKComponentControllerProtocol;
+@protocol CKTreeNodeWithChildrenProtocol;
 
 @class CKComponentScopeFrame;
 @class CKComponentScopeRoot;
-@class CKRenderTreeNodeWithChildren;
 
 /** Component state announcements will always be made on the main thread. */
 @protocol CKComponentStateListener <NSObject>
@@ -53,8 +53,8 @@
  */
 + (instancetype)rootWithListener:(id<CKComponentStateListener>)listener
                analyticsListener:(id<CKAnalyticsListener>)analyticsListener
-             componentPredicates:(const std::unordered_set<CKComponentScopePredicate> &)componentPredicates
-   componentControllerPredicates:(const std::unordered_set<CKComponentControllerScopePredicate> &)componentControllerPredicates;
+             componentPredicates:(const std::unordered_set<CKComponentPredicate> &)componentPredicates
+   componentControllerPredicates:(const std::unordered_set<CKComponentControllerPredicate> &)componentControllerPredicates;
 
 /** Creates a new version of an existing scope root, ready to be used for building a component tree */
 - (instancetype)newRoot;
@@ -63,15 +63,16 @@
 - (void)registerComponentController:(id<CKComponentControllerProtocol>)componentController;
 - (void)registerComponent:(id<CKComponentProtocol>)component;
 
-- (CKCocoaCollectionAdapter<id<CKComponentProtocol>>)componentsMatchingPredicate:(CKComponentScopePredicate)predicate;
+- (CKCocoaCollectionAdapter<id<CKComponentProtocol>>)componentsMatchingPredicate:(CKComponentPredicate)predicate;
+- (CKCocoaCollectionAdapter<id<CKComponentControllerProtocol>>)componentControllersMatchingPredicate:(CKComponentControllerPredicate)predicate;
 
 @property (nonatomic, weak, readonly) id<CKComponentStateListener> listener;
-@property (nonatomic, weak, readonly) id<CKAnalyticsListener> analyticsListener;
+@property (nonatomic, strong, readonly) id<CKAnalyticsListener> analyticsListener;
 @property (nonatomic, readonly) CKComponentScopeRootIdentifier globalIdentifier;
 @property (nonatomic, strong, readonly) CKComponentScopeFrame *rootFrame;
 
 /** Render Support */
-@property (nonatomic, strong, readonly) CKRenderTreeNodeWithChildren *rootNode;
+@property (nonatomic, strong, readonly) id<CKTreeNodeWithChildrenProtocol> rootNode;
 @property (nonatomic, assign) BOOL hasRenderComponentInTree;
 
 #if DEBUG

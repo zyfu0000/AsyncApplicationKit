@@ -9,13 +9,12 @@
  */
 
 #import <ComponentKit/CKComponent.h>
-#import <ComponentKit/CKComponentLayout.h>
 #import <ComponentKit/CKRenderComponentProtocol.h>
 
-@interface CKRenderWithChildrenComponent : CKComponent <CKRenderComponentProtocol>
+@interface CKRenderWithChildrenComponent : CKComponent <CKRenderWithChildrenComponentProtocol>
 
 /*
- Returns a vector of 'CKComponent' children that will be render to the screen.
+ Returns a vector of 'CKComponent' children that will be rendered to the screen.
 
  If you override this method, you must override the `computeLayoutThatFits:` and provide a layout for these components.
  If you don't need a custom layout, you can just use CKFlexboxComponent instead.

@@ -11,24 +11,26 @@
 #import "CKRenderWithSizeSpecComponent.h"
 
 #import "CKBuildComponent.h"
+#import "CKRenderHelpers.h"
 #import "CKRenderTreeNodeWithChildren.h"
 #import "CKComponentInternal.h"
 
 struct CKRenderWithSizeSpecComponentParameters {
-  id<CKTreeNodeWithChildrenProtocol> previousOwnerForChild;
-  const CKComponentStateUpdateMap* stateUpdates;
-  __weak CKComponentScopeRoot *scopeRoot;
-  BOOL forceParent;
+  id<CKTreeNodeWithChildrenProtocol> previousParentForChild;
+  const CKBuildComponentTreeParams &params;
+  const CKBuildComponentConfig &config;
+  const BOOL hasDirtyParent;
 
-  CKRenderWithSizeSpecComponentParameters(id<CKTreeNodeWithChildrenProtocol> pO,
-                                          const CKComponentStateUpdateMap* sU,
-                                          CKComponentScopeRoot *sR,
-                                          BOOL fp) : previousOwnerForChild(pO), stateUpdates(sU), scopeRoot(sR), forceParent(fp) {};
+  CKRenderWithSizeSpecComponentParameters(id<CKTreeNodeWithChildrenProtocol> pP,
+                                          const CKBuildComponentTreeParams &p,
+                                          const CKBuildComponentConfig &c,
+                                          BOOL hDP) : previousParentForChild(pP), params(p), config(c), hasDirtyParent(hDP) {};
 };
 
 @implementation CKRenderWithSizeSpecComponent {
   __weak CKRenderTreeNodeWithChildren *_node;
   std::unique_ptr<CKRenderWithSizeSpecComponentParameters> _parameters;
+  NSHashTable<CKComponent *> *_measuredComponents;
 #if CK_ASSERTIONS_ENABLED
   NSMutableSet *_renderedChildrenSet;
 #endif
@@ -50,23 +52,57 @@ struct CKRenderWithSizeSpecComponentParameters {
                          isLayoutComponent:(BOOL)isLayoutComponent
 {
   auto const c = [super newRenderComponentWithView:view size:size isLayoutComponent:isLayoutComponent];
-#if CK_ASSERTIONS_ENABLED
   if (c) {
+    c->_measuredComponents = [NSHashTable weakObjectsHashTable];
+#if CK_ASSERTIONS_ENABLED
     c->_renderedChildrenSet = [NSMutableSet new];
-  }
 #endif
+  }
   return c;
 }
+
+- (void)buildComponentTree:(id<CKTreeNodeWithChildrenProtocol>)parent
+            previousParent:(id<CKTreeNodeWithChildrenProtocol>)previousParent
+                    params:(const CKBuildComponentTreeParams &)params
+                    config:(const CKBuildComponentConfig &)config
+            hasDirtyParent:(BOOL)hasDirtyParent
+{
+  if (!_node) {
+    auto const node = [[CKRenderTreeNodeWithChildren alloc]
+                       initWithComponent:self
+                       parent:parent
+                       previousParent:previousParent
+                       scopeRoot:params.scopeRoot
+                       stateUpdates:params.stateUpdates];
+    _node = node;
+
+    // Update the `hasDirtyParent` param for Faster state/props updates.
+    if (!hasDirtyParent && CKRender::hasDirtyParent(node, previousParent, params, config)) {
+      hasDirtyParent = YES;
+    }
+
+    auto const previousParentForChild = (id<CKTreeNodeWithChildrenProtocol>)[previousParent childForComponentKey:[node componentKey]];
+    _parameters = std::make_unique<CKRenderWithSizeSpecComponentParameters>(previousParentForChild,
+                                                                            params,
+                                                                            config,
+                                                                            hasDirtyParent);
+  }
+}
+
 
 - (CKComponentLayout)measureChild:(CKComponent *)child
                   constrainedSize:(CKSizeRange)constrainedSize
              relativeToParentSize:(CGSize)parentSize {
   CKAssert(_parameters.get() != nullptr, @"measureChild called outside layout calculations");
-  [child buildComponentTree:_node
-              previousOwner:_parameters->previousOwnerForChild
-                  scopeRoot:_parameters->scopeRoot
-               stateUpdates:*(_parameters->stateUpdates)
-                forceParent:_parameters->forceParent];
+  if (![_measuredComponents containsObject:child]) {
+    [child buildComponentTree:_node
+               previousParent:_parameters->previousParentForChild
+                       params:_parameters->params
+                       config:_parameters->config
+               hasDirtyParent:_parameters->hasDirtyParent];
+    [_measuredComponents addObject:child];
+  }
+
 #if CK_ASSERTIONS_ENABLED
   [_renderedChildrenSet addObject:child];
 #endif
@@ -79,7 +115,6 @@ struct CKRenderWithSizeSpecComponentParameters {
                           restrictedToSize:(const CKComponentSize &)size
                       relativeToParentSize:(CGSize)parentSize
 {
-  [_node reset];
   auto const layout = [self render:_node.state constrainedSize:constrainedSize restrictedToSize:size relativeToParentSize:parentSize];
 #if CK_ASSERTIONS_ENABLED
   checkIfAllChildrenComponentHaveBeenAddedToComponentTree(layout,_renderedChildrenSet);
@@ -104,39 +139,12 @@ struct CKRenderWithSizeSpecComponentParameters {
   return {};
 }
 
-- (void)buildComponentTree:(id<CKTreeNodeWithChildrenProtocol>)owner
-             previousOwner:(id<CKTreeNodeWithChildrenProtocol>)previousOwner
-                 scopeRoot:(CKComponentScopeRoot *)scopeRoot
-              stateUpdates:(const CKComponentStateUpdateMap &)stateUpdates
-               forceParent:(BOOL)forceParent
+- (void)dealloc
 {
-  CKAssertTrue([[self class] isOwnerComponent]);
-  if (!_node) {
-    auto const node = [[CKRenderTreeNodeWithChildren alloc]
-                       initWithComponent:self
-                       owner:owner
-                       previousOwner:previousOwner
-                       scopeRoot:scopeRoot
-                       stateUpdates:stateUpdates];
-    _node = node;
-
-    _parameters = std::make_unique<CKRenderWithSizeSpecComponentParameters>((id<CKTreeNodeWithChildrenProtocol>)[previousOwner childForComponentKey:[_node componentKey]],
-                                                                            &stateUpdates,
-                                                                            scopeRoot,
-                                                                            forceParent);
-  }
-}
-
-- (void)dealloc {
   _parameters = nullptr;
 }
 
 #pragma mark - CKRenderComponent
-
-+ (BOOL)isOwnerComponent
-{
-  return YES;
-}
 
 + (id)initialStateWithComponent:(id<CKRenderComponentProtocol>)component
 {
@@ -147,6 +155,13 @@ struct CKRenderWithSizeSpecComponentParameters {
 {
   return [CKTreeNodeEmptyState emptyState];
 }
+
+- (BOOL)shouldComponentUpdate:(id<CKRenderComponentProtocol>)component
+{
+  return YES;
+}
+
+- (void)didReuseComponent:(id<CKRenderComponentProtocol>)component {}
 
 #pragma mark - Render layout checker
 

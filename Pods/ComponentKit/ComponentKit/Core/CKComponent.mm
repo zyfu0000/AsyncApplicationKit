@@ -16,6 +16,7 @@
 #import <ComponentKit/CKArgumentPrecondition.h>
 #import <ComponentKit/CKComponentScopeEnumeratorProvider.h>
 #import <ComponentKit/CKAssert.h>
+#import <ComponentKit/CKBuildComponent.h>
 #import <ComponentKit/CKInternalHelpers.h>
 #import <ComponentKit/CKMacros.h>
 #import <ComponentKit/CKMutex.h>
@@ -150,19 +151,19 @@ struct CKComponentMountInfo {
 
 #pragma mark - ComponentTree
 
-- (void)buildComponentTree:(id<CKTreeNodeWithChildrenProtocol>)owner
-             previousOwner:(id<CKTreeNodeWithChildrenProtocol>)previousOwner
-                 scopeRoot:(CKComponentScopeRoot *)scopeRoot
-              stateUpdates:(const CKComponentStateUpdateMap &)stateUpdates
-               forceParent:(BOOL)forceParent
+- (void)buildComponentTree:(id<CKTreeNodeWithChildrenProtocol>)parent
+            previousParent:(id<CKTreeNodeWithChildrenProtocol>)previousParent
+                    params:(const CKBuildComponentTreeParams &)params
+                    config:(const CKBuildComponentConfig &)config
+            hasDirtyParent:(BOOL)hasDirtyParent
 {
   // In this case this is a leaf component, which means we don't need to continue the recursion as it has no children.
   __unused auto const node = [[CKTreeNode alloc]
                               initWithComponent:self
-                              owner:owner
-                              previousOwner:previousOwner
-                              scopeRoot:scopeRoot
-                              stateUpdates:stateUpdates];
+                              parent:parent
+                              previousParent:previousParent
+                              scopeRoot:params.scopeRoot
+                              stateUpdates:params.stateUpdates];
 }
 
 #pragma mark - Mounting and Unmounting
@@ -172,7 +173,7 @@ struct CKComponentMountInfo {
                                     children:(std::shared_ptr<const std::vector<CKComponentLayoutChild>>)children
                               supercomponent:(CKComponent *)supercomponent
 {
-  CKAssertMainThread();
+  CKCAssertWithCategory([NSThread isMainThread], [self class], @"This method must be called on the main thread");
   // Taking a const ref to a temporary extends the lifetime of the temporary to the lifetime of the const ref
   const CKComponentViewConfiguration &viewConfiguration = CK::Component::Accessibility::IsAccessibilityEnabled() ? CK::Component::Accessibility::AccessibleViewConfiguration(_viewConfiguration) : _viewConfiguration;
 
@@ -217,9 +218,9 @@ struct CKComponentMountInfo {
     _mountInfo->viewContext = {v, {{0,0}, v.bounds.size}};
     return {.mountChildren = YES, .contextForChildren = effectiveContext.childContextForSubview(v, g.didBlockAnimations)};
   } else {
-    CKAssertNil(_mountInfo->view,
-                @"%@ should not have a mounted %@ after previously being mounted without a view.\n%@",
-                [self class], [_mountInfo->view class], CKComponentBacktraceDescription(generateComponentBacktrace(self)));
+    CKCAssertWithCategory(_mountInfo->view == nil, [self class],
+                          @"%@ should not have a mounted %@ after previously being mounted without a view.\n%@",
+                          [self class], [_mountInfo->view class], CKComponentBacktraceDescription(generateComponentBacktrace(self)));
     _mountInfo->viewContext = {effectiveContext.viewManager->view, {effectiveContext.position, size}};
     return {.mountChildren = YES, .contextForChildren = effectiveContext};
   }
@@ -274,6 +275,11 @@ struct CKComponentMountInfo {
   return {};
 }
 
+- (std::vector<CKComponentFinalUnmountAnimation>)animationsOnFinalUnmount
+{
+  return {};
+}
+
 - (UIView *)viewForAnimation
 {
   CKAssertMainThread();
@@ -293,10 +299,10 @@ struct CKComponentMountInfo {
   CKAssert(layout.component == self, @"Layout computed by %@ should return self as component, but returned %@",
            [self class], [layout.component class]);
   CKSizeRange resolvedRange __attribute__((unused)) = constrainedSize.intersect(_size.resolve(parentSize));
-  CKAssertWithCategory(layout.size.width <= resolvedRange.max.width
-                       && layout.size.width >= resolvedRange.min.width
-                       && layout.size.height <= resolvedRange.max.height
-                       && layout.size.height >= resolvedRange.min.height,
+  CKAssertWithCategory(CKIsGreaterThanOrEqualWithTolerance(resolvedRange.max.width, layout.size.width)
+                       && CKIsGreaterThanOrEqualWithTolerance(layout.size.width, resolvedRange.min.width)
+                       && CKIsGreaterThanOrEqualWithTolerance(resolvedRange.max.height,layout.size.height)
+                       && CKIsGreaterThanOrEqualWithTolerance(layout.size.height,resolvedRange.min.height),
                        NSStringFromClass([self class]),
                        @"Computed size %@ for %@ does not fall within constrained size %@\n%@",
                        NSStringFromCGSize(layout.size), [self class], resolvedRange.description(),

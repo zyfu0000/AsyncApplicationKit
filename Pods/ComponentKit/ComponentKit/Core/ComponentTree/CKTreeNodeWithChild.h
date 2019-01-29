@@ -19,4 +19,6 @@
 
 @interface CKTreeNodeWithChild : CKTreeNode <CKTreeNodeWithChildrenProtocol>
 
+@property (nonatomic, strong) id<CKTreeNodeProtocol> child;
+
 @end

@@ -1,1 +1,1 @@
-../../../ComponentKit/ComponentKit/Core/CKRenderWithSizeSpecComponent.h
+../../../ComponentKit/ComponentKit/Core/Render/CKRenderWithSizeSpecComponent.h

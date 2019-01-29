@@ -75,12 +75,7 @@
      然后告诉 DataSource应用Changeset以及使用同步还是异步模式更新。
      相当于[self.collectionView reloadData];
      */
-    CKDataSourceChangeset *changeSet = [[CKDataSourceChangeset alloc]initWithUpdatedItems:nil
-                                                                              removedItems:nil
-                                                                           removedSections:nil
-                                                                                movedItems:nil
-                                                                          insertedSections:zeroSet
-                                                                             insertedItems:mmDic];
+    CKDataSourceChangeset *changeSet = [[[[CKDataSourceChangesetBuilder transactionalComponentDataSourceChangeset] withInsertedSections:zeroSet] withInsertedItems:mmDic] build];
     
     [self.dataSource applyChangeset:changeSet mode:CKUpdateModeAsynchronous userInfo:nil] ;
 

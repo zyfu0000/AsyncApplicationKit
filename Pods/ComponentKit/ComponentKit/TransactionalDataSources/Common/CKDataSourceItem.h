@@ -10,13 +10,12 @@
 
 #import <Foundation/Foundation.h>
 #import <ComponentKit/CKComponentBoundsAnimation.h>
+#import <ComponentKit/CKComponentRootLayoutProvider.h>
 
-class CKComponentLayout;
+struct CKComponentRootLayout;
 @class CKComponentScopeRoot;
 
-@interface CKDataSourceItem : NSObject
-
-- (const CKComponentLayout &)layout;
+@interface CKDataSourceItem : NSObject <CKComponentRootLayoutProvider>
 
 /** The model used to compute the layout */
 @property (nonatomic, strong, readonly) id model;

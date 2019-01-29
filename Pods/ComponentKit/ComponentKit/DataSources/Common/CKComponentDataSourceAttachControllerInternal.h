@@ -10,6 +10,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import <ComponentKit/CKAnimationApplicator.h>
 #import <ComponentKit/CKComponentDataSourceAttachController.h>
 #import <ComponentKit/CKComponentScopeTypes.h>
 
@@ -21,11 +22,14 @@
 
 - (instancetype)initWithScopeIdentifier:(CKComponentScopeRootIdentifier)scopeIdentifier
                       mountedComponents:(NSSet *)mountedComponents
-                                 layout:(const CKComponentLayout &)layout;
+                    animationApplicator:(const std::shared_ptr<CK::AnimationApplicator<CK::ComponentAnimationsController>> &)animationApplicator;
 
-- (const CKComponentLayout &)layout;
+- (const std::shared_ptr<CK::AnimationApplicator<CK::ComponentAnimationsController>> &)animationApplicator;
 
 @end
+
+const CKComponentRootLayout &CKComponentDataSourceAttachStateRootLayout(const CKComponentDataSourceAttachState *const self);
+void CKComponentDataSourceAttachStateSetRootLayout(CKComponentDataSourceAttachState *const self, const CKComponentRootLayout &rootLayout);
 
 @interface CKComponentDataSourceAttachController ()
 

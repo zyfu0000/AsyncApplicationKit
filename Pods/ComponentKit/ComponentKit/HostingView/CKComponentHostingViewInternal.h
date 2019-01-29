@@ -13,6 +13,7 @@
 #import <ComponentKit/CKComponentLayout.h>
 #import <ComponentKit/CKComponentScopeTypes.h>
 #import <ComponentKit/CKComponentScopeEnumeratorProvider.h>
+#import <ComponentKit/CKDataSourceAnimationOptions.h>
 #import <ComponentKit/CKInspectableView.h>
 
 #import <unordered_set>
@@ -20,10 +21,11 @@
 struct CKComponentHostingViewOptions {
   /// Build and layout components in a unified pass. It's meant to be used only if buildComponentTree == YES; please DO NOT use it yet, it's in a testing stage. Default NO.
   BOOL unifyBuildAndLayout;
-  /// Enable cache for layout and build result that are computed during the layout process lifetime. DO NOT use it yet, it's in a testing stage. Default NO.
-  BOOL cacheLayoutAndBuildResult;
   /// If set to YES, allows taps to pass though this hosting view to views behind it. Default NO.
   BOOL allowTapPassthrough;
+  CKDataSourceAnimationOptions animationOptions;
+  // If set to YES, invalidates controllers that are removed whilst the hosting view remains alive. Default NO.
+  BOOL invalidateRemovedControllers;
 };
 
 @interface CKComponentHostingView () <CKInspectableView>
@@ -42,8 +44,8 @@ struct CKComponentHostingViewOptions {
  */
 - (instancetype)initWithComponentProvider:(Class<CKComponentProvider>)componentProvider
                         sizeRangeProvider:(id<CKComponentSizeRangeProviding>)sizeRangeProvider
-                      componentPredicates:(const std::unordered_set<CKComponentScopePredicate> &)componentPredicates
-            componentControllerPredicates:(const std::unordered_set<CKComponentControllerScopePredicate> &)componentControllerPredicates
+                      componentPredicates:(const std::unordered_set<CKComponentPredicate> &)componentPredicates
+            componentControllerPredicates:(const std::unordered_set<CKComponentControllerPredicate> &)componentControllerPredicates
                         analyticsListener:(id<CKAnalyticsListener>)analyticsListener
                                   options:(const CKComponentHostingViewOptions &)options;
 

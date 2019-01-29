@@ -16,32 +16,33 @@
 #include <tuple>
 
 @implementation CKTreeNodeWithChild
-{
-  CKTreeNode *_child;
-}
 
 - (std::vector<id<CKTreeNodeProtocol>>)children
 {
   return {_child};
 }
 
-- (CKTreeNode *)childForComponentKey:(const CKComponentKey &)key
+- (size_t)childrenSize
 {
-  CKAssert(std::get<0>(key) == [_child.component class], @"CKComponentKey(%@, %ld) contains incorrect class(%@) type.",
-           std::get<0>(key),
-           (unsigned long)std::get<1>(key),
-           [_child.component class]);
-  return _child;
+  return _child ? 1 : 0;
 }
 
-- (CKComponentKey)createComponentKeyForChildWithClass:(id<CKComponentProtocol>)componentClass
+- (CKTreeNode *)childForComponentKey:(const CKTreeNodeComponentKey &)key
+{
+  if (std::get<0>(key) == [_child.component class]) {
+    return _child;
+  }
+  return nil;
+}
+
+- (CKTreeNodeComponentKey)createComponentKeyForChildWithClass:(id<CKComponentProtocol>)componentClass
 {
   return std::make_tuple(componentClass, 0);
 }
 
-- (void)setChild:(CKTreeNode *)child forComponentKey:(const CKComponentKey &)componentKey
+- (void)setChild:(CKTreeNode *)child forComponentKey:(const CKTreeNodeComponentKey &)componentKey
 {
-  CKAssert(_child == nil, @"_child shouldn't set more than once.");
+  CKAssert(_child == nil || [_child class] == [child class], @"[_child class]: %@ is different than [child class]: %@", [_child class], [child class]);
   _child = child;
 }
 

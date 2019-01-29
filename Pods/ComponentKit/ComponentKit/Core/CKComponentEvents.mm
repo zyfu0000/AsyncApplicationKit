@@ -42,6 +42,11 @@ auto CKComponentHasAnimationsFromPreviousComponentPredicate(id<CKComponentProtoc
   return CKSubclassOverridesSelector([CKComponent class], [c class], @selector(animationsFromPreviousComponent:));
 }
 
+auto CKComponentHasAnimationsOnFinalUnmountPredicate(id<CKComponentProtocol> const c) -> BOOL
+{
+  return CKSubclassOverridesSelector([CKComponent class], [c class], @selector(animationsOnFinalUnmount));
+}
+
 CKComponentBoundsAnimation CKComponentBoundsAnimationFromPreviousScopeRoot(CKComponentScopeRoot *newRoot, CKComponentScopeRoot *previousRoot)
 {
   NSMapTable *const scopeFrameTokenToOldComponent = [NSMapTable strongToStrongObjectsMapTable];
@@ -74,7 +79,8 @@ CKComponentBoundsAnimation CKComponentBoundsAnimationFromPreviousScopeRoot(CKCom
   return boundsAnimation;
 }
 
-void CKComponentSendDidPrepareLayoutForComponent(CKComponentScopeRoot *scopeRoot, const CKComponentLayout layout) {
+void CKComponentSendDidPrepareLayoutForComponent(CKComponentScopeRoot *scopeRoot, const CKComponentRootLayout &layout)
+{
   // Iterate over the components that their controllers override the 'didPrepareLayoutForComponent' method.
   [scopeRoot enumerateComponentsMatchingPredicate:&CKComponentDidPrepareLayoutForComponentToControllerPredicate
                                             block:^(id<CKComponentProtocol> c) {

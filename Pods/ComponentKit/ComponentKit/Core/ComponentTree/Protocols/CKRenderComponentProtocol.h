@@ -19,30 +19,56 @@
 @protocol CKRenderComponentProtocol <CKComponentProtocol>
 
 /*
- This method defines how a component behaves when the component tree is being constructed with
- 'buildComponentTree:previousOwner:scopeRoot:stateUpdates'.
-
- Each component has a corresponding CKTreeNode; this node holds the component's state and its children nodes.
- If a component is an owner component, its children nodes (CKTreeNode) will be attached to its corresponding node.
- Otherwise, they will be attached to the component's owner.
-
- Return yes in case your component is the owner of its children components.
- Owner means that the component creates its children directly in its render method.
-
- For example:
- CKRenderComponent is an owner component.
- CKFlexboxComponent isn't; it receives its children as props in its constructor.
-
- Default values:
- CKRenderComponent returns YES
- CKRenderWithChildrenComponent returns NO
- */
-+ (BOOL)isOwnerComponent;
-
-/*
  Override this method in order to provide an initialState which depends on the component's props.
  Otherwise, override `+(id)initialState` instead.
  */
 + (id)initialStateWithComponent:(id<CKRenderComponentProtocol>)component;
+
+/*
+ Override this method in order to allow ComopnentKit to reuse the previous components.
+
+ You can always assume that the `component` parameter is the same type as your component.
+
+ The default value is `YES`.
+ */
+- (BOOL)shouldComponentUpdate:(id<CKRenderComponentProtocol>)component;
+
+/*
+ This method is being called when the infrasturcture reuses the previous generation of the component.
+
+ When a previous component is being reused, the render method WON'T be called on the new generation of the component.
+ If your render method is not a pure function (for example, it saves components as iVar), you can use this method
+ in order to update the new component from the reused one.
+ */
+- (void)didReuseComponent:(id<CKRenderComponentProtocol>)component;
+
+@end
+
+
+/**
+ Render component with a single child.
+ */
+@protocol CKRenderWithChildComponentProtocol <CKRenderComponentProtocol>
+
+/**
+ Returns a child component that needs to be rendered from this component.
+
+ @param state The current state of the component.
+ */
+- (CKComponent *)render:(id)state;
+
+@end
+
+/**
+ Render component with multi child.
+ */
+@protocol CKRenderWithChildrenComponentProtocol <CKRenderComponentProtocol>
+
+/*
+ Returns a vector of 'CKComponent' children that will be rendered to the screen.
+
+ @param state The current state of the component.
+ */
+- (std::vector<CKComponent *>)renderChildren:(id)state;
 
 @end

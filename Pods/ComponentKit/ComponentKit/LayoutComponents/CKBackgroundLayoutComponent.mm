@@ -37,33 +37,9 @@
   return c;
 }
 
-+ (instancetype)newWithView:(const CKComponentViewConfiguration &)view size:(const CKComponentSize &)size
+- (std::vector<CKComponent *>)renderChildren:(id)state
 {
-  CK_NOT_DESIGNATED_INITIALIZER();
-}
-
-- (void)buildComponentTree:(id<CKTreeNodeWithChildrenProtocol>)owner
-             previousOwner:(id<CKTreeNodeWithChildrenProtocol>)previousOwner
-                 scopeRoot:(CKComponentScopeRoot *)scopeRoot
-              stateUpdates:(const CKComponentStateUpdateMap &)stateUpdates
-               forceParent:(BOOL)forceParent
-{
-  if (forceParent) {
-    auto const node = [[CKTreeNodeWithChildren alloc]
-                       initWithComponent:self
-                       owner:owner
-                       previousOwner:previousOwner
-                       scopeRoot:scopeRoot
-                       stateUpdates:stateUpdates];
-
-    auto const previousOwnerForChild = (id<CKTreeNodeWithChildrenProtocol>)[previousOwner childForComponentKey:[node componentKey]];
-    [_component buildComponentTree:node previousOwner:previousOwnerForChild scopeRoot:scopeRoot stateUpdates:stateUpdates forceParent:forceParent];
-    [_background buildComponentTree:node previousOwner:previousOwnerForChild scopeRoot:scopeRoot stateUpdates:stateUpdates forceParent:forceParent];
-  } else {
-    [super buildComponentTree:owner previousOwner:previousOwner scopeRoot:scopeRoot stateUpdates:stateUpdates forceParent:forceParent];
-    [_component buildComponentTree:owner previousOwner:previousOwner scopeRoot:scopeRoot stateUpdates:stateUpdates forceParent:forceParent];
-    [_background buildComponentTree:owner previousOwner:previousOwner scopeRoot:scopeRoot stateUpdates:stateUpdates forceParent:forceParent];
-  }
+  return {_component, _background};
 }
 
 /**

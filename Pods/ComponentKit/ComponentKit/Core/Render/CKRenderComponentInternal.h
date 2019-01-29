@@ -8,16 +8,12 @@
  *
  */
 
-#import <Foundation/Foundation.h>
 
-#import "CKComponentLayout.h"
+#import <ComponentKit/CKRenderComponent.h>
 
-@class CKComponent;
+@interface CKRenderComponent ()
 
-@interface CKComponentLayoutCache : NSObject
-
-+ (instancetype)newWithLayout:(const CKComponentLayout &)layout;
-
-- (CKComponentLayout)layoutForComponent:(CKComponent *)c;
+@property (readonly, nonatomic, strong) CKComponent *childComponent;
 
 @end
+

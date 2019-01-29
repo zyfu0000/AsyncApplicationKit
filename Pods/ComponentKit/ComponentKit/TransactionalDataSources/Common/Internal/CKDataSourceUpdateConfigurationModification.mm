@@ -47,6 +47,7 @@
   // If only the size range changed, we don't need to regenerate the component; we can simply re-layout the existing one.
   const BOOL onlySizeRangeChanged = [_configuration context] == [[oldState configuration] context]
   && [_configuration componentProvider] == [[oldState configuration] componentProvider];
+  const auto animationPredicates = CKComponentAnimationPredicates(_configuration.animationOptions);
 
   NSMutableArray *newSections = [NSMutableArray array];
   NSMutableSet *updatedIndexPaths = [NSMutableSet set];
@@ -56,13 +57,13 @@
       [updatedIndexPaths addObject:[NSIndexPath indexPathForItem:itemIdx inSection:sectionIdx]];
       CKDataSourceItem *newItem;
       if (onlySizeRangeChanged && !_configuration.unifyBuildAndLayout) {
-        const CKComponentLayout layout = CKComputeRootComponentLayout(item.layout.component, sizeRange, [item scopeRoot].analyticsListener);
-        newItem = [[CKDataSourceItem alloc] initWithLayout:layout
-                                                     model:[item model]
-                                                 scopeRoot:[item scopeRoot]
-                                           boundsAnimation:[item boundsAnimation]];
+        const auto rootLayout = CKComputeRootComponentLayout(item.rootLayout.component(), sizeRange, [item scopeRoot].analyticsListener);
+        newItem = [[CKDataSourceItem alloc] initWithRootLayout:rootLayout
+                                                         model:[item model]
+                                                     scopeRoot:[item scopeRoot]
+                                               boundsAnimation:[item boundsAnimation]];
       } else {
-        newItem = CKBuildDataSourceItem([item scopeRoot], {}, sizeRange, _configuration, [item model], context);
+        newItem = CKBuildDataSourceItem([item scopeRoot], {}, sizeRange, _configuration, [item model], context, animationPredicates);
       }
       [newItems addObject:newItem];
     }];

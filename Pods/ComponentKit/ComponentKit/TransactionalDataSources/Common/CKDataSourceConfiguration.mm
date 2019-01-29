@@ -17,8 +17,11 @@
 @implementation CKDataSourceConfiguration
 {
   CKSizeRange _sizeRange;
-  std::unordered_set<CKComponentScopePredicate> _componentPredicates;
-  std::unordered_set<CKComponentControllerScopePredicate> _componentControllerPredicates;
+  std::unordered_set<CKComponentPredicate> _componentPredicates;
+  std::unordered_set<CKComponentControllerPredicate> _componentControllerPredicates;
+  CKBuildComponentConfig _buildComponentConfig;
+  CKDataSourceQOSOptions _qosOptions;
+  CKDataSourceAnimationOptions _animationOptions;
 }
 
 - (instancetype)initWithComponentProvider:(Class<CKComponentProvider>)componentProvider
@@ -28,12 +31,14 @@
   return [self initWithComponentProvider:componentProvider
                                  context:context
                                sizeRange:sizeRange
+                    buildComponentConfig:{}
+                              qosOptions:{}
                      unifyBuildAndLayout:NO
-                             forceParent:NO
             parallelInsertBuildAndLayout:NO
    parallelInsertBuildAndLayoutThreshold:0
             parallelUpdateBuildAndLayout:NO
    parallelUpdateBuildAndLayoutThreshold:0
+                        animationOptions:{}
                      componentPredicates:{}
            componentControllerPredicates:{}
                        analyticsListener:nil];
@@ -42,14 +47,16 @@
 - (instancetype)initWithComponentProvider:(Class<CKComponentProvider>)componentProvider
                                   context:(id<NSObject>)context
                                 sizeRange:(const CKSizeRange &)sizeRange
+                     buildComponentConfig:(const CKBuildComponentConfig &)buildComponentConfig
+                               qosOptions:(const CKDataSourceQOSOptions &)qosOptions
                       unifyBuildAndLayout:(BOOL)unifyBuildAndLayout
-                              forceParent:(BOOL)forceParent
              parallelInsertBuildAndLayout:(BOOL)parallelInsertBuildAndLayout
     parallelInsertBuildAndLayoutThreshold:(NSUInteger)parallelInsertBuildAndLayoutThreshold
              parallelUpdateBuildAndLayout:(BOOL)parallelUpdateBuildAndLayout
     parallelUpdateBuildAndLayoutThreshold:(NSUInteger)parallelUpdateBuildAndLayoutThreshold
-                      componentPredicates:(const std::unordered_set<CKComponentScopePredicate> &)componentPredicates
-            componentControllerPredicates:(const std::unordered_set<CKComponentControllerScopePredicate> &)componentControllerPredicates
+                         animationOptions:(const CKDataSourceAnimationOptions &)animationOptions
+                      componentPredicates:(const std::unordered_set<CKComponentPredicate> &)componentPredicates
+            componentControllerPredicates:(const std::unordered_set<CKComponentControllerPredicate> &)componentControllerPredicates
                         analyticsListener:(id<CKAnalyticsListener>)analyticsListener
 {
   if (self = [super init]) {
@@ -60,21 +67,38 @@
     _componentControllerPredicates = componentControllerPredicates;
     _analyticsListener = analyticsListener;
     _unifyBuildAndLayout = unifyBuildAndLayout;
-    _forceParent = forceParent;
+    _buildComponentConfig = buildComponentConfig;
     _parallelInsertBuildAndLayout = parallelInsertBuildAndLayout;
     _parallelInsertBuildAndLayoutThreshold = parallelInsertBuildAndLayoutThreshold;
     _parallelUpdateBuildAndLayout = parallelUpdateBuildAndLayout;
     _parallelUpdateBuildAndLayoutThreshold = parallelUpdateBuildAndLayoutThreshold;
+    _qosOptions = qosOptions;
+    _animationOptions = animationOptions;
   }
   return self;
 }
 
-- (const std::unordered_set<CKComponentScopePredicate> &)componentPredicates
+- (const CKBuildComponentConfig &)buildComponentConfig
+{
+  return _buildComponentConfig;
+}
+
+- (const CKDataSourceQOSOptions &)qosOptions
+{
+  return _qosOptions;
+}
+
+- (const CKDataSourceAnimationOptions &)animationOptions
+{
+  return _animationOptions;
+}
+
+- (const std::unordered_set<CKComponentPredicate> &)componentPredicates
 {
   return _componentPredicates;
 }
 
-- (const std::unordered_set<CKComponentControllerScopePredicate> &)componentControllerPredicates
+- (const std::unordered_set<CKComponentControllerPredicate> &)componentControllerPredicates
 {
   return _componentControllerPredicates;
 }

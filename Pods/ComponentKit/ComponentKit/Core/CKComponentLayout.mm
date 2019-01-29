@@ -21,18 +21,29 @@
 #import "CKComponentInternal.h"
 #import "CKComponentSubclass.h"
 #import "CKDetectComponentScopeCollisions.h"
-#import "CKComponentLayoutCache.h"
 
 using namespace CK::Component;
-
-static NSString *const kComponentCacheKey = @"componentCacheKey";
 
 static void _deleteComponentLayoutChild(void *target) noexcept
 {
   delete (std::vector<CKComponentLayoutChild> *)target;
 }
 
-static void CKBuildScopedComponentLayoutCache(CKComponentLayout &layout);
+static auto buildComponentsByPredicateMap(const CKComponentLayout &layout, const std::unordered_set<CKComponentPredicate> &predicates)
+{
+  auto componentsByPredicate = CKComponentRootLayout::ComponentsByPredicateMap {};
+  if (predicates.empty()) { return componentsByPredicate; }
+
+  layout.enumerateLayouts([&](const auto &l){
+    if (l.component == nil) { return; }
+    for (const auto &p : predicates) {
+      if (p(l.component)) {
+        componentsByPredicate[p].push_back(l.component);
+      }
+    }
+  });
+  return componentsByPredicate;
+}
 
 void CKOffMainThreadDeleter::operator()(std::vector<CKComponentLayoutChild> *target) noexcept
 {
@@ -117,16 +128,27 @@ CKMountComponentLayoutResult CKMountComponentLayout(const CKComponentLayout &lay
   return {mountedComponents, componentsToUnmount};
 }
 
-CKComponentLayout CKComputeRootComponentLayout(CKComponent *rootComponent,
-                                               const CKSizeRange &sizeRange,
-                                               id<CKAnalyticsListener> analyticsListener)
-                                             {
+CKComponentRootLayout CKComputeRootComponentLayout(CKComponent *rootComponent,
+                                                   const CKSizeRange &sizeRange,
+                                                   id<CKAnalyticsListener> analyticsListener,
+                                                   std::unordered_set<CKComponentPredicate> predicates)
+{
   [analyticsListener willLayoutComponentTreeWithRootComponent:rootComponent];
   CKComponentLayout layout = CKComputeComponentLayout(rootComponent, sizeRange, sizeRange.max);
   CKDetectComponentScopeCollisions(layout);
-  CKBuildScopedComponentLayoutCache(layout);
+  auto layoutCache = CKComponentRootLayout::ComponentLayoutCache {};
+  layout.enumerateLayouts([&](const auto &l){
+    if (l.component.controller) {
+      layoutCache[l.component] = l;
+    }
+  });
+  const auto componentsByPredicate = buildComponentsByPredicateMap(layout, predicates);
   [analyticsListener didLayoutComponentTreeWithRootComponent:rootComponent];
-  return layout;
+  return CKComponentRootLayout {
+    layout,
+    layoutCache,
+    componentsByPredicate,
+  };
 }
 
 CKComponentLayout CKComputeComponentLayout(CKComponent *component,
@@ -143,27 +165,12 @@ void CKUnmountComponents(NSSet *componentsToUnmount)
   }
 }
 
-static void CKBuildScopedComponentLayoutCache(CKComponentLayout &layout)
+void CKComponentLayout::enumerateLayouts(const std::function<void(const CKComponentLayout &)> &f) const
 {
-  // Build the cache.
-  CKComponentLayoutCache *cache = [CKComponentLayoutCache newWithLayout:layout];
+  f(*this);
 
-  // Store it in the root node.
-  NSDictionary *extra = layout.extra;
-  if (extra) {
-    NSMutableDictionary *extraWithCache = [NSMutableDictionary dictionaryWithDictionary:extra];
-    extraWithCache[kComponentCacheKey] = cache;
-    layout.extra = extraWithCache;
-  } else {
-    layout.extra = @{kComponentCacheKey : cache};
+  if (children == nil) { return; }
+  for (const auto &child : *children) {
+    child.layout.enumerateLayouts(f);
   }
-}
-
-CKComponentLayout CKComponentLayout::cachedLayoutForScopedComponent(CKComponent *scopedComponent) const
-{
-  CKComponentLayoutCache *cache = extra[kComponentCacheKey];
-  if (cache) {
-    return [cache layoutForComponent:scopedComponent];
-  }
-  return {};
 }
