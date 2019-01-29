@@ -7,20 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		722AC15321F9E17F00E6F11A /* NSNotificationCenter+AnyPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = 722AC13821F9E17F00E6F11A /* NSNotificationCenter+AnyPromise.m */; };
-		722AC15421F9E17F00E6F11A /* NSTask+AnyPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = 722AC13A21F9E17F00E6F11A /* NSTask+AnyPromise.m */; };
-		722AC15521F9E17F00E6F11A /* NSURLSession+AnyPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = 722AC13C21F9E17F00E6F11A /* NSURLSession+AnyPromise.m */; };
-		722AC15621F9E17F00E6F11A /* UIView+AnyPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = 722AC14221F9E17F00E6F11A /* UIView+AnyPromise.m */; };
-		722AC15721F9E17F00E6F11A /* UIViewController+AnyPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = 722AC14421F9E17F00E6F11A /* UIViewController+AnyPromise.m */; };
-		722AC15821F9E17F00E6F11A /* after.m in Sources */ = {isa = PBXBuildFile; fileRef = 722AC14621F9E17F00E6F11A /* after.m */; };
-		722AC15921F9E17F00E6F11A /* AnyPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = 722AC14921F9E17F00E6F11A /* AnyPromise.m */; };
-		722AC15A21F9E17F00E6F11A /* dispatch_promise.m in Sources */ = {isa = PBXBuildFile; fileRef = 722AC14A21F9E17F00E6F11A /* dispatch_promise.m */; };
-		722AC15B21F9E17F00E6F11A /* hang.m in Sources */ = {isa = PBXBuildFile; fileRef = 722AC14C21F9E17F00E6F11A /* hang.m */; };
-		722AC15C21F9E17F00E6F11A /* join.m in Sources */ = {isa = PBXBuildFile; fileRef = 722AC14D21F9E17F00E6F11A /* join.m */; };
-		722AC15D21F9E17F00E6F11A /* NSMethodSignatureForBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 722AC14E21F9E17F00E6F11A /* NSMethodSignatureForBlock.m */; };
-		722AC15E21F9E17F00E6F11A /* PMKCallVariadicBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 722AC14F21F9E17F00E6F11A /* PMKCallVariadicBlock.m */; };
-		722AC15F21F9E17F00E6F11A /* race.m in Sources */ = {isa = PBXBuildFile; fileRef = 722AC15121F9E17F00E6F11A /* race.m */; };
-		722AC16021F9E17F00E6F11A /* when.m in Sources */ = {isa = PBXBuildFile; fileRef = 722AC15221F9E17F00E6F11A /* when.m */; };
+		722AC1C32200001800E6F11A /* RJIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = 722AC1C22200001800E6F11A /* RJIterator.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		72917B4E216A5F4B002AD5A7 /* SecondViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 72917B4D216A5F4B002AD5A7 /* SecondViewController.mm */; };
 		72E7253A215787A600DDEECF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 72E72539215787A600DDEECF /* AppDelegate.m */; };
 		72E72542215787A800DDEECF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72E72541215787A800DDEECF /* Assets.xcassets */; };
@@ -44,31 +31,8 @@
 /* Begin PBXFileReference section */
 		01F6B987FBB878DF5658093E /* Pods-AsyncApplicationKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AsyncApplicationKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AsyncApplicationKit/Pods-AsyncApplicationKit.debug.xcconfig"; sourceTree = "<group>"; };
 		63AA948FD82474C2C5467CEB /* libPods-AsyncApplicationKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AsyncApplicationKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		722AC13721F9E17F00E6F11A /* NSNotificationCenter+AnyPromise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotificationCenter+AnyPromise.h"; sourceTree = "<group>"; };
-		722AC13821F9E17F00E6F11A /* NSNotificationCenter+AnyPromise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNotificationCenter+AnyPromise.m"; sourceTree = "<group>"; };
-		722AC13921F9E17F00E6F11A /* NSTask+AnyPromise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTask+AnyPromise.h"; sourceTree = "<group>"; };
-		722AC13A21F9E17F00E6F11A /* NSTask+AnyPromise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTask+AnyPromise.m"; sourceTree = "<group>"; };
-		722AC13B21F9E17F00E6F11A /* NSURLSession+AnyPromise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLSession+AnyPromise.h"; sourceTree = "<group>"; };
-		722AC13C21F9E17F00E6F11A /* NSURLSession+AnyPromise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLSession+AnyPromise.m"; sourceTree = "<group>"; };
-		722AC13D21F9E17F00E6F11A /* PMKFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMKFoundation.h; sourceTree = "<group>"; };
-		722AC14021F9E17F00E6F11A /* PMKUIKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMKUIKit.h; sourceTree = "<group>"; };
-		722AC14121F9E17F00E6F11A /* UIView+AnyPromise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AnyPromise.h"; sourceTree = "<group>"; };
-		722AC14221F9E17F00E6F11A /* UIView+AnyPromise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AnyPromise.m"; sourceTree = "<group>"; };
-		722AC14321F9E17F00E6F11A /* UIViewController+AnyPromise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+AnyPromise.h"; sourceTree = "<group>"; };
-		722AC14421F9E17F00E6F11A /* UIViewController+AnyPromise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+AnyPromise.m"; sourceTree = "<group>"; };
-		722AC14621F9E17F00E6F11A /* after.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = after.m; sourceTree = "<group>"; };
-		722AC14721F9E17F00E6F11A /* AnyPromise+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AnyPromise+Private.h"; sourceTree = "<group>"; };
-		722AC14821F9E17F00E6F11A /* AnyPromise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyPromise.h; sourceTree = "<group>"; };
-		722AC14921F9E17F00E6F11A /* AnyPromise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnyPromise.m; sourceTree = "<group>"; };
-		722AC14A21F9E17F00E6F11A /* dispatch_promise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dispatch_promise.m; sourceTree = "<group>"; };
-		722AC14B21F9E17F00E6F11A /* fwd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fwd.h; sourceTree = "<group>"; };
-		722AC14C21F9E17F00E6F11A /* hang.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hang.m; sourceTree = "<group>"; };
-		722AC14D21F9E17F00E6F11A /* join.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = join.m; sourceTree = "<group>"; };
-		722AC14E21F9E17F00E6F11A /* NSMethodSignatureForBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSMethodSignatureForBlock.m; sourceTree = "<group>"; };
-		722AC14F21F9E17F00E6F11A /* PMKCallVariadicBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMKCallVariadicBlock.m; sourceTree = "<group>"; };
-		722AC15021F9E17F00E6F11A /* PromiseKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PromiseKit.h; sourceTree = "<group>"; };
-		722AC15121F9E17F00E6F11A /* race.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = race.m; sourceTree = "<group>"; };
-		722AC15221F9E17F00E6F11A /* when.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = when.m; sourceTree = "<group>"; };
+		722AC1C12200001800E6F11A /* RJIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJIterator.h; sourceTree = "<group>"; };
+		722AC1C22200001800E6F11A /* RJIterator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJIterator.m; sourceTree = "<group>"; };
 		72917B4C216A5F4B002AD5A7 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
 		72917B4D216A5F4B002AD5A7 /* SecondViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SecondViewController.mm; sourceTree = "<group>"; };
 		72E72535215787A600DDEECF /* AsyncApplicationKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AsyncApplicationKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,84 +91,13 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		722AC13321F9E17F00E6F11A /* PromiseKit */ = {
+		722AC1C02200001800E6F11A /* RJIterator */ = {
 			isa = PBXGroup;
 			children = (
-				722AC13421F9E17F00E6F11A /* Extensions */,
-				722AC14521F9E17F00E6F11A /* Sources */,
+				722AC1C12200001800E6F11A /* RJIterator.h */,
+				722AC1C22200001800E6F11A /* RJIterator.m */,
 			);
-			path = PromiseKit;
-			sourceTree = "<group>";
-		};
-		722AC13421F9E17F00E6F11A /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				722AC13521F9E17F00E6F11A /* Foundation */,
-				722AC13E21F9E17F00E6F11A /* UIKit */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		722AC13521F9E17F00E6F11A /* Foundation */ = {
-			isa = PBXGroup;
-			children = (
-				722AC13621F9E17F00E6F11A /* Sources */,
-			);
-			path = Foundation;
-			sourceTree = "<group>";
-		};
-		722AC13621F9E17F00E6F11A /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				722AC13721F9E17F00E6F11A /* NSNotificationCenter+AnyPromise.h */,
-				722AC13821F9E17F00E6F11A /* NSNotificationCenter+AnyPromise.m */,
-				722AC13921F9E17F00E6F11A /* NSTask+AnyPromise.h */,
-				722AC13A21F9E17F00E6F11A /* NSTask+AnyPromise.m */,
-				722AC13B21F9E17F00E6F11A /* NSURLSession+AnyPromise.h */,
-				722AC13C21F9E17F00E6F11A /* NSURLSession+AnyPromise.m */,
-				722AC13D21F9E17F00E6F11A /* PMKFoundation.h */,
-			);
-			path = Sources;
-			sourceTree = "<group>";
-		};
-		722AC13E21F9E17F00E6F11A /* UIKit */ = {
-			isa = PBXGroup;
-			children = (
-				722AC13F21F9E17F00E6F11A /* Sources */,
-			);
-			path = UIKit;
-			sourceTree = "<group>";
-		};
-		722AC13F21F9E17F00E6F11A /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				722AC14021F9E17F00E6F11A /* PMKUIKit.h */,
-				722AC14121F9E17F00E6F11A /* UIView+AnyPromise.h */,
-				722AC14221F9E17F00E6F11A /* UIView+AnyPromise.m */,
-				722AC14321F9E17F00E6F11A /* UIViewController+AnyPromise.h */,
-				722AC14421F9E17F00E6F11A /* UIViewController+AnyPromise.m */,
-			);
-			path = Sources;
-			sourceTree = "<group>";
-		};
-		722AC14521F9E17F00E6F11A /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				722AC14621F9E17F00E6F11A /* after.m */,
-				722AC14721F9E17F00E6F11A /* AnyPromise+Private.h */,
-				722AC14821F9E17F00E6F11A /* AnyPromise.h */,
-				722AC14921F9E17F00E6F11A /* AnyPromise.m */,
-				722AC14A21F9E17F00E6F11A /* dispatch_promise.m */,
-				722AC14B21F9E17F00E6F11A /* fwd.h */,
-				722AC14C21F9E17F00E6F11A /* hang.m */,
-				722AC14D21F9E17F00E6F11A /* join.m */,
-				722AC14E21F9E17F00E6F11A /* NSMethodSignatureForBlock.m */,
-				722AC14F21F9E17F00E6F11A /* PMKCallVariadicBlock.m */,
-				722AC15021F9E17F00E6F11A /* PromiseKit.h */,
-				722AC15121F9E17F00E6F11A /* race.m */,
-				722AC15221F9E17F00E6F11A /* when.m */,
-			);
-			path = Sources;
+			path = RJIterator;
 			sourceTree = "<group>";
 		};
 		72E7252C215787A600DDEECF = {
@@ -228,7 +121,7 @@
 		72E72537215787A600DDEECF /* AsyncApplicationKit */ = {
 			isa = PBXGroup;
 			children = (
-				722AC13321F9E17F00E6F11A /* PromiseKit */,
+				722AC1C02200001800E6F11A /* RJIterator */,
 				72F98A3021834AD600ABBECA /* Coco */,
 				72E725622167448800DDEECF /* Core */,
 				72E72538215787A600DDEECF /* AppDelegate.h */,
@@ -393,31 +286,18 @@
 				72F98A4121834AD700ABBECA /* CocoVComponet.mm in Sources */,
 				72E72548215787A800DDEECF /* main.m in Sources */,
 				72E7255E2165BDE000DDEECF /* AAKViewController.m in Sources */,
-				722AC15D21F9E17F00E6F11A /* NSMethodSignatureForBlock.m in Sources */,
 				72917B4E216A5F4B002AD5A7 /* SecondViewController.mm in Sources */,
-				722AC15321F9E17F00E6F11A /* NSNotificationCenter+AnyPromise.m in Sources */,
 				72F98A4021834AD700ABBECA /* CocoImageDownloader.mm in Sources */,
 				72F98A4621834AD700ABBECA /* CocoVC.mm in Sources */,
-				722AC15621F9E17F00E6F11A /* UIView+AnyPromise.m in Sources */,
 				72E7253A215787A600DDEECF /* AppDelegate.m in Sources */,
-				722AC15C21F9E17F00E6F11A /* join.m in Sources */,
 				72F98A4221834AD700ABBECA /* CocoVContentComponet.mm in Sources */,
 				72F98A4B2188060B00ABBECA /* AAKCollectionViewController.m in Sources */,
 				72F98A4521834AD700ABBECA /* CocoModel.m in Sources */,
-				722AC15A21F9E17F00E6F11A /* dispatch_promise.m in Sources */,
-				722AC15421F9E17F00E6F11A /* NSTask+AnyPromise.m in Sources */,
 				72F98A4321834AD700ABBECA /* CocoVFooterComponet.mm in Sources */,
-				722AC15721F9E17F00E6F11A /* UIViewController+AnyPromise.m in Sources */,
-				722AC15521F9E17F00E6F11A /* NSURLSession+AnyPromise.m in Sources */,
 				72E725682167A50F00DDEECF /* AAKNavigationController.m in Sources */,
-				722AC15921F9E17F00E6F11A /* AnyPromise.m in Sources */,
-				722AC15821F9E17F00E6F11A /* after.m in Sources */,
-				722AC16021F9E17F00E6F11A /* when.m in Sources */,
+				722AC1C32200001800E6F11A /* RJIterator.m in Sources */,
 				72F98A4421834AD700ABBECA /* CocoVHeaderComponet.mm in Sources */,
-				722AC15F21F9E17F00E6F11A /* race.m in Sources */,
 				72E725652167A47B00DDEECF /* AAKDispatchQueue.m in Sources */,
-				722AC15E21F9E17F00E6F11A /* PMKCallVariadicBlock.m in Sources */,
-				722AC15B21F9E17F00E6F11A /* hang.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
