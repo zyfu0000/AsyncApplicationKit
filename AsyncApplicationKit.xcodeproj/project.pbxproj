@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		722AC1C32200001800E6F11A /* RJIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = 722AC1C22200001800E6F11A /* RJIterator.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		722AC1C722003EE100E6F11A /* AAKModelGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 722AC1C622003EE100E6F11A /* AAKModelGenerator.m */; };
 		72917B4E216A5F4B002AD5A7 /* SecondViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 72917B4D216A5F4B002AD5A7 /* SecondViewController.mm */; };
 		72E7253A215787A600DDEECF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 72E72539215787A600DDEECF /* AppDelegate.m */; };
 		72E72542215787A800DDEECF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72E72541215787A800DDEECF /* Assets.xcassets */; };
@@ -33,6 +34,8 @@
 		63AA948FD82474C2C5467CEB /* libPods-AsyncApplicationKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AsyncApplicationKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		722AC1C12200001800E6F11A /* RJIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJIterator.h; sourceTree = "<group>"; };
 		722AC1C22200001800E6F11A /* RJIterator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJIterator.m; sourceTree = "<group>"; };
+		722AC1C522003EE100E6F11A /* AAKModelGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AAKModelGenerator.h; sourceTree = "<group>"; };
+		722AC1C622003EE100E6F11A /* AAKModelGenerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AAKModelGenerator.m; sourceTree = "<group>"; };
 		72917B4C216A5F4B002AD5A7 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
 		72917B4D216A5F4B002AD5A7 /* SecondViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SecondViewController.mm; sourceTree = "<group>"; };
 		72E72535215787A600DDEECF /* AsyncApplicationKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AsyncApplicationKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,6 +129,8 @@
 				72E725622167448800DDEECF /* Core */,
 				72E72538215787A600DDEECF /* AppDelegate.h */,
 				72E72539215787A600DDEECF /* AppDelegate.m */,
+				722AC1C522003EE100E6F11A /* AAKModelGenerator.h */,
+				722AC1C622003EE100E6F11A /* AAKModelGenerator.m */,
 				72E7255F2165C14400DDEECF /* FirstViewController.h */,
 				72E725602165C14400DDEECF /* FirstViewController.mm */,
 				72917B4C216A5F4B002AD5A7 /* SecondViewController.h */,
@@ -282,11 +287,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				722AC1C32200001800E6F11A /* RJIterator.m in Sources */,
 				72E725612165C14400DDEECF /* FirstViewController.mm in Sources */,
 				72F98A4121834AD700ABBECA /* CocoVComponet.mm in Sources */,
 				72E72548215787A800DDEECF /* main.m in Sources */,
 				72E7255E2165BDE000DDEECF /* AAKViewController.m in Sources */,
 				72917B4E216A5F4B002AD5A7 /* SecondViewController.mm in Sources */,
+				722AC1C722003EE100E6F11A /* AAKModelGenerator.m in Sources */,
 				72F98A4021834AD700ABBECA /* CocoImageDownloader.mm in Sources */,
 				72F98A4621834AD700ABBECA /* CocoVC.mm in Sources */,
 				72E7253A215787A600DDEECF /* AppDelegate.m in Sources */,
@@ -295,7 +302,6 @@
 				72F98A4521834AD700ABBECA /* CocoModel.m in Sources */,
 				72F98A4321834AD700ABBECA /* CocoVFooterComponet.mm in Sources */,
 				72E725682167A50F00DDEECF /* AAKNavigationController.m in Sources */,
-				722AC1C32200001800E6F11A /* RJIterator.m in Sources */,
 				72F98A4421834AD700ABBECA /* CocoVHeaderComponet.mm in Sources */,
 				72E725652167A47B00DDEECF /* AAKDispatchQueue.m in Sources */,
 			);

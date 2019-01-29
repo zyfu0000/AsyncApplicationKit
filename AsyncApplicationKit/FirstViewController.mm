@@ -13,6 +13,8 @@
 #import <KVOController.h>
 #import <ComponentKit/ComponentKit.h>
 #import "CocoVComponet.h"
+#import "RJIterator.h"
+#import "AAKModelGenerator.h"
 
 @interface FirstViewController () <CKComponentProvider>
 
@@ -44,30 +46,35 @@
                                                 configuration:configuration];
     self.dataSource = mDataSource;
     
-    NSMutableDictionary *mmDic = [NSMutableDictionary dictionaryWithCapacity:20];
-    for (int i=0; i<4; i++) //准备20个测试数据
-    {
-        NSIndexPath *indexpathi =[NSIndexPath indexPathForRow:i inSection:0];
-        
-        NSString *ss = [NSString stringWithFormat:@"Cell[%ld]",(long)i];
-        CocoModel *coco =[[CocoModel alloc] init];
-        coco.name = ss;
-        coco.num = i;
-        coco.layoutStyle = (myLayoutStyle)(i%3);
-        [mmDic setObject:coco forKey:indexpathi];
-        
-    }
-    NSIndexSet *zeroSet = [NSIndexSet indexSetWithIndex:0];
+//    NSMutableDictionary *mmDic = [NSMutableDictionary dictionaryWithCapacity:20];
+//    for (int i=0; i<4; i++) //准备20个测试数据
+//    {
+//        NSIndexPath *indexpathi =[NSIndexPath indexPathForRow:i inSection:0];
+//
+//        NSString *ss = [NSString stringWithFormat:@"Cell[%ld]",(long)i];
+//        CocoModel *coco =[[CocoModel alloc] init];
+//        coco.name = ss;
+//        coco.num = i;
+//        coco.layoutStyle = (myLayoutStyle)(i%3);
+//        [mmDic setObject:coco forKey:indexpathi];
+//    }
     
-    /*
-     Changeset:配合DataSource使用的，每次数据有更新会创建新的Changeset，
-     Changeset 用来描述增加哪些Cells，删除哪些Cells 还是更新那些Cells,
-     然后告诉 DataSource应用Changeset以及使用同步还是异步模式更新。
-     相当于[self.collectionView reloadData];
-     */
-    CKDataSourceChangeset *changeSet = [[[[CKDataSourceChangesetBuilder transactionalComponentDataSourceChangeset] withInsertedSections:zeroSet] withInsertedItems:mmDic] build];
-    
-    [self.dataSource applyChangeset:changeSet mode:CKUpdateModeAsynchronous userInfo:nil] ;
+    rj_async(^{
+        RJResult *result = rj_await([AAKModelGenerator getFirstModels]);
+        NSDictionary *mmDic = result.value;
+        
+        NSIndexSet *zeroSet = [NSIndexSet indexSetWithIndex:0];
+        
+        /*
+         Changeset:配合DataSource使用的，每次数据有更新会创建新的Changeset，
+         Changeset 用来描述增加哪些Cells，删除哪些Cells 还是更新那些Cells,
+         然后告诉 DataSource应用Changeset以及使用同步还是异步模式更新。
+         相当于[self.collectionView reloadData];
+         */
+        CKDataSourceChangeset *changeSet = [[[[CKDataSourceChangesetBuilder transactionalComponentDataSourceChangeset] withInsertedSections:zeroSet] withInsertedItems:mmDic] build];
+        
+        [self.dataSource applyChangeset:changeSet mode:CKUpdateModeAsynchronous userInfo:nil] ;
+    });
 }
 
 /*

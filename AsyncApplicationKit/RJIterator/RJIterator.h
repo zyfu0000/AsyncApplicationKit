@@ -12,9 +12,9 @@
 @class RJIterator;
 @class RJAsyncEpilog;
 
-id _Nullable rj_yield(id _Nullable value);
-RJResult * _Nonnull rj_await(id _Nullable value);
-RJAsyncEpilog *_Nonnull rj_async(dispatch_block_t _Nonnull block);
+FOUNDATION_EXTERN id _Nullable rj_yield(id _Nullable value);
+FOUNDATION_EXTERN RJResult * _Nonnull rj_await(id _Nullable value);
+FOUNDATION_EXTERN RJAsyncEpilog *_Nonnull rj_async(dispatch_block_t _Nonnull block);
 
 
 typedef id _Nullable (*RJGenetarorFunc)(id _Nullable);
