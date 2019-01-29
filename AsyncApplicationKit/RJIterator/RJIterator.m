@@ -11,6 +11,7 @@
 #import <objc/runtime.h>
 #import <setjmp.h>
 #import <pthread.h>
+#import "AAKDispatchQueue.h"
 
 //#if DEMO
 //#import "RJIterator-Swift.h"
@@ -524,13 +525,15 @@ RJAsyncEpilog * rj_async(dispatch_block_t block) {
                 [value isKindOfClass:NSClassFromString(@"__NSStackBlock__")] ||
                 [value isKindOfClass:NSClassFromString(@"__NSMallocBlock__")]
                 ) {
-                ((RJAsyncClosure)value)(^(id value, id error) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [result release];
-                        result = [iterator next: [RJResult resultWithValue:value error:error done:NO]].retain;
-                        step();
+                [AAKDispatchQueue async:^{
+                    ((RJAsyncClosure)value)(^(id value, id error) {
+    //                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                            [result release];
+                            result = [iterator next: [RJResult resultWithValue:value error:error done:NO]].retain;
+                            step();
                     });
-                });
+                }];
             }
             //swift 闭包
 //            else if (NSClassFromString(@"_SwiftValue") &&

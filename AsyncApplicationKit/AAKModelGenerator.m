@@ -16,23 +16,20 @@
 + (RJAsyncClosure)getFirstModels
 {
     return ^(RJAsyncCallback callback) {
-        [AAKDispatchQueue async:^{
+        NSMutableDictionary *mmDic = [NSMutableDictionary dictionaryWithCapacity:20];
+        for (int i=0; i<20; i++) //准备20个测试数据
+        {
+            NSIndexPath *indexpathi = [NSIndexPath indexPathForRow:i inSection:0];
             
-            NSMutableDictionary *mmDic = [NSMutableDictionary dictionaryWithCapacity:20];
-            for (int i=0; i<20; i++) //准备20个测试数据
-            {
-                NSIndexPath *indexpathi = [NSIndexPath indexPathForRow:i inSection:0];
-                
-                NSString *ss = [NSString stringWithFormat:@"Cell[%ld]",(long)i];
-                CocoModel *coco =[[CocoModel alloc] init];
-                coco.name = ss;
-                coco.num = i;
-                coco.layoutStyle = (myLayoutStyle)(i%3);
-                [mmDic setObject:coco forKey:indexpathi];
-            }
-            
-            callback(mmDic, nil);
-        }];
+            NSString *ss = [NSString stringWithFormat:@"Cell[%ld]",(long)i];
+            CocoModel *coco =[[CocoModel alloc] init];
+            coco.name = ss;
+            coco.num = i;
+            coco.layoutStyle = (myLayoutStyle)(i%3);
+            [mmDic setObject:coco forKey:indexpathi];
+        }
+        
+        callback(mmDic, nil);
     };
 }
 
